@@ -1,5 +1,1 @@
-### Todo
-- [ ] Server Rendering
-- [ ] State Architecture (Redux / Flux)
-- [ ] Make folder structure great again
-- [ ] Universal JS
+### Front End for RUMANTARA (Final Project)

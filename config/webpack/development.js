@@ -12,7 +12,7 @@ module.exports = {
     "webpack/hot/only-dev-server"
   ],
   output: {
-    path : path.join(__dirname,"../../","public"),
+    path : path.resolve(__dirname,"../../","public"),
     publicPath : "/public/",
     filename: "script.js"
   },
@@ -21,11 +21,20 @@ module.exports = {
     new ExtractTextPlugin('styles.css')
   ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
-      include : path.join(__dirname, "../..","src")
-    }
+    rules: [
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, "../..","src"),
+        use: [
+          {
+            loader: 'react-hot-loader'
+          },
+          {
+            loader: 'babel-loader',
+            options: {presets: ["es2015", "react", "stage-0"]}
+          }
+        ]
+      }
     ]
   }
 };
