@@ -34,6 +34,13 @@ module.exports = {
             options: {presets: ["es2015", "react", "stage-0"]}
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        include: path.resolve(__dirname, "../../src");
+        use: [
+          
+        ]
       }
     ]
   },

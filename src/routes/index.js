@@ -2,17 +2,17 @@ import React from 'react';
 
 import {Route, IndexRoute} from 'react-router';
 
-import App from '../components/App';
+import Root from '../modules/Root';
 
-import Home from '../components/pages/Home';
-import About from '../components/pages/About';
-import NotFound from '../components/pages/NotFound';
-import Login from '../components/pages/Login';
-import Register from '../components/pages/Register';
-import Host from '../components/pages/Host';
+import Home from '../modules/pages/Home';
+import About from '../modules/pages/About';
+import NotFound from '../modules/pages/NotFound';
+import Login from '../modules/pages/Login';
+import Register from '../modules/pages/Register';
+import Host from '../modules/pages/Host';
 
 const routes = (
-  <Route path="/" component={App}>
+  <Route path="/" component={Root}>
     <IndexRoute component={Home}/>
     <Route path="about" component={About}/>
     <Route path="host" component={Host}/>
