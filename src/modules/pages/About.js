@@ -1,10 +1,12 @@
 import React from 'react';
 
+import Primary from '../components/templates/Primary';
+
 const About = () => {
   return (
-    <div>
+    <Primary>
       Hello From About
-    </div>
+    </Primary>
   )
 };
 export default About;

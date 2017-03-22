@@ -1,10 +1,12 @@
 import React from 'react';
 
+import Primary from '../components/templates/Primary';
+
 const NotFound = () => {
   return (
-    <div>
+    <Primary>
       Error 404
-    </div>
+    </Primary>
   )
 };
 

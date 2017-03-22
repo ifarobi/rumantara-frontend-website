@@ -14,7 +14,7 @@ import Host from '../modules/pages/Host';
 const routes = (
   <Route path="/" component={Root}>
     <IndexRoute component={Home}/>
-    <Route path="about" component={About}/>
+    <Route path="help" component={About}/>
     <Route path="host" component={Host}/>
     <Route path="login" component={Login}/>
     <Route path="register" component={Register}/>

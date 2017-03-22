@@ -1,8 +1,10 @@
 import React from 'react';
 
+import Primary from '../components/templates/Primary';
+
 const Register = () => {
   return (
-    <div>
+    <Primary>
       <h2 className="text-center">Hello From Register</h2>
       <form>
         <div className="form-group">
@@ -19,7 +21,7 @@ const Register = () => {
         </div>
         <button type="submit" className="btn btn-default">Daftar</button>
       </form>
-    </div>
+    </Primary>
   )
 };
 export default Register;

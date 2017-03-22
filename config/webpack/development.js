@@ -35,6 +35,24 @@ module.exports = {
           }
         ]
       },
+      {
+        test: /\.css$/,
+        include: path.resolve(__dirname, "../../src"),
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                camelCase: true,
+                sourceMap: true,
+                localIdentName: '[name]__[local]--[hash:base64:5]'
+              }
+            }
+          ]
+        })
+      }
     ]
   },
   devtool: "#inline-source-map"

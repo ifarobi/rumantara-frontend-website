@@ -1,8 +1,10 @@
 import React from 'react';
 
+import Primary from '../components/templates/Primary';
+
 const Login = () => {
   return (
-    <div>
+    <Primary>
       <h2 className="text-center">Hello From Login</h2>
       <form>
         <div className="form-group">
@@ -15,7 +17,7 @@ const Login = () => {
         </div>
         <button type="submit" className="btn btn-default">Submit</button>
       </form>
-    </div>
+    </Primary>
   )
 };
 export default Login;

@@ -1,10 +1,12 @@
 import React from 'react';
 
+import Primary from '../components/templates/Primary';
+
 const Host = () => {
   return (
-    <div>
+    <Primary>
       Hello From Host
-    </div>
+    </Primary>
   )
 };
 export default Host;
