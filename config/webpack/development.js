@@ -35,13 +35,6 @@ module.exports = {
           }
         ]
       },
-      {
-        test: /\.css$/,
-        include: path.resolve(__dirname, "../../src");
-        use: [
-          
-        ]
-      }
     ]
   },
   devtool: "#inline-source-map"
