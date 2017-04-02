@@ -14,6 +14,7 @@ export default class Primary extends Component{
     return (
       <Menu
         inline={true}
+        responsive={true}
         direction='row'>
         <NavAnchor to="/host">Jadi Tuan Rumah</NavAnchor>
         <NavAnchor to="/help">Bantuan</NavAnchor>

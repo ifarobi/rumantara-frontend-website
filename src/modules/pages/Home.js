@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import Primary from '../components/templates/Primary';
+import Hero from '../components/organisms/Hero/ImageAndSearch'
 
 export default class Home extends Component{
   constructor(props){
@@ -9,7 +10,7 @@ export default class Home extends Component{
   render(){
     return(
       <Primary>
-        <h2>Hello From Home</h2>
+        <Hero/>
       </Primary>
     )
   }

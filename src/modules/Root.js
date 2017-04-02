@@ -7,7 +7,7 @@ import App from 'grommet/components/App';
 class Root extends Component{
   render(){
     return (
-      <App>
+      <App centered={false}>
           {this.props.children}
       </App>
     )
