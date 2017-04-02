@@ -1,0 +1,14 @@
+.boxContainer{
+  background: white;
+  border: 1px solid #ddd;
+}
+.imageWrapper{
+  max-height: 300px;
+  width: 100%;
+}
+.descWrapper{
+  padding: 10px;
+}
+.price{
+  font-weight: bold
+}
