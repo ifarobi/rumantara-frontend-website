@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 
 var appConfig = require('./config/app.js');
-var webpackConfig = require('./config/webpack/development.js');
+var webpackConfig = require('./config/webpack.dev.js');
 
 var server = new WebpackDevServer(webpack(webpackConfig), {
   hot: true,

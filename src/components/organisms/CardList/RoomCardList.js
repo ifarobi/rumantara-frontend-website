@@ -7,19 +7,19 @@ import Box from 'grommet/components/Box'
 import RoomCard from '../../molecules/Card/RoomCard'
 
 class RoomCardList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.renderCards = this.renderCards.bind(this)
   }
   renderCards() {
-    return this.props.data.map(room => <RoomCard key={room.id} data={room}/>)
+    return this.props.data.map(room => <RoomCard key={room.id} data={room} />)
   }
   render() {
     console.log(this.renderCards())
     const { title } = this.props
-    return(
+    return (
       <Section>
-        <Heading tag='h3'>
+        <Heading tag="h3">
           {title}
         </Heading>
         <Box direction="row">
@@ -32,7 +32,7 @@ class RoomCardList extends Component {
 
 RoomCardList.propTypes = {
   title: React.PropTypes.string,
-  data: React.PropTypes.array
+  data: React.PropTypes.array.isRequired
 }
 
 

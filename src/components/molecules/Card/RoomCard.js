@@ -5,16 +5,19 @@ import Image from 'grommet/components/Image'
 import Heading from 'grommet/components/Heading'
 import Label from 'grommet/components/Label'
 
-import { price } from '../../../../helper/price'
+import { price } from '../../../helper/price'
 
 import Style from './styles/RoomCard.css'
 
-const RoomCard = ({data}) => (
-  <Box className={Style.boxContainer}
+const RoomCard = ({ data }) => (
+  <Box
+    className={Style.boxContainer}
     size="medium"
-    margin="small">
+    basis={1 / 4}
+    margin="small"
+  >
     <div className={Style.imageWrapper}>
-      <Image src={data.image} fit="cover" full={true}/>
+      <Image src={data.image} fit="cover" full={true} />
     </div>
     <div className={Style.descWrapper}>
       <div>

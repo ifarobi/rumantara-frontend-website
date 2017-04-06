@@ -1,5 +1,5 @@
 module.exports = {
-  port : "3003",
+  port : "8080",
   host : "localhost",
   protocol : "http"
 }
