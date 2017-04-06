@@ -24,7 +24,7 @@ class Root extends Component {
 
   render() {
     return (
-      <App centered={false}>
+      <App className="rumantara-app" centered={false}>
         { this.props.children }
       </App>
     )
