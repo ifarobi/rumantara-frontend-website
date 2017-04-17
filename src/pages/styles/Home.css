@@ -1,0 +1,14 @@
+.heroHome{
+  color: white;
+  text-align: center;
+}
+.textHero{
+  font-size: 48px;
+  font-weight: 300;
+  margin-top: 50px;
+}
+@media only screen and (max-width: 63em){
+  .textHero{
+    font-size: 36px;
+  }
+}

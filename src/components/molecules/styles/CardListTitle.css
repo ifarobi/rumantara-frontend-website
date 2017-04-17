@@ -1,0 +1,21 @@
+.cardListTitleContainer{
+  margin-top: 30px;
+}
+.cardListTitleContainer :global h2{
+  font-weight: 300;
+}
+.cardListTitleContainer :global hr{
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 1em 0;
+  padding: 0;
+}
+
+@media only screen and (max-width: 63em){
+  .cardListTitleContainer{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

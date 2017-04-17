@@ -4,10 +4,13 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-boolean-value": [2, "always"],
     "react/prop-types": 1,
-    "semi": [2, "never"]
+    "semi": [2, "never"],
+    "quote-props": 1
   },
   "globals": {
     "Modernizr": true,
-    "document": true
+    "document": true,
+    "localStorage": true,
+    "fetch": true,
   }
 }

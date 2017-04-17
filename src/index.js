@@ -1,18 +1,26 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import path from 'path'
+
+import { Provider } from 'react-redux'
 
 import { Router, browserHistory, hashHistory } from 'react-router'
 
+import { syncHistoryWithStore } from 'react-router-redux'
+
 import routes from './routes'
+import configureStore from './store/configureStore'
 
-const history = (Modernizr && Modernizr.history) ? browserHistory : hashHistory
-
-global.SRCDIR = path.resolve(__dirname)
+const store = configureStore()
+const history = syncHistoryWithStore(
+  (Modernizr && Modernizr.history) ? browserHistory : hashHistory,
+  store,
+)
 
 ReactDom.render(
-  <Router
-    history={history}
-    routes={routes}
-  />
-  , document.getElementById('root'))
+  <Provider store={store}>
+    <Router
+      history={history}
+      routes={routes}
+    />
+  </Provider>
+, document.getElementById('root'))

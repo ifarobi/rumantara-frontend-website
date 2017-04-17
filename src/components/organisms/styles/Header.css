@@ -1,0 +1,23 @@
+.headerContainer{
+  background: white;
+  color: #333;
+}
+.headerContainer :global a{
+  color: #6060e2;
+}
+.logoContainer{
+  height: 100%;
+  padding: 15px 5px;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+.logoContainer :global img{
+  height: 100%;
+}
+.navAnchor{
+  padding: 23px 15px;
+}
+.leftIcon{
+  color: #6060e2 !important;
+}

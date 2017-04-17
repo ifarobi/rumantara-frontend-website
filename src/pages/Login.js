@@ -1,11 +1,15 @@
 import React from 'react'
 
 import Primary from '../components/templates/Primary'
-import LoginForm from '../components/organisms/Forms/LoginForm'
+import FormLogin from '../components/organisms/FormLogin'
+
+import style from './styles/Login.css'
 
 const Login = () => (
   <Primary>
-    <LoginForm />
+    <div className={style.wrapperLogin}>
+      <FormLogin />
+    </div>
   </Primary>
 )
 

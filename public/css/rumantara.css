@@ -1,12 +1,78 @@
-.rumantara-app {
-  font-family: 'Source Sans Pro', sans-serif; }
+*{
+  padding:0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
 
-.container {
-  max-width: 1152px;
-  margin: auto;
-  width: 100%; }
-
-.bg-white {
-  background: white; }
-
-/*# sourceMappingURL=rumantara.css.map */
+/*DEFAULT STYLE*/
+.rumantaraRoot{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #2c3e50;
+}
+.anchor{
+  text-decoration: none;
+}
+.pageContainer{
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.no-pad{
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.no-left-pad{
+  padding-left: 0;
+}
+.no-right-pad{
+  padding-right: 0;
+}
+.grid-only-pad-xs{
+  padding:0;
+}
+.no-box-shadow{
+  box-shadow: none;
+}
+.no-radius{
+  border-radius: 0;
+}
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right;
+}
+.pull-left{
+  float:left;
+}
+.pull-right{
+  float: right;
+}
+.clearfix, .cleafix::after{
+  display: block;
+  content:"";
+  clear: both;
+}
+.flex-self-start{
+  align-self: flex-start;
+}
+.flex-self-end{
+  align-self: flex-end;
+}
+@media only screen and (max-width: 63em){
+  .no-left-pad-xs{
+    padding-left: 0
+  }
+  .grid-only-pad-xs{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACA,cAAc;EACZ,WAAW,EAAE,6BAA6B;;AAG5C,UAAU;EACR,SAAS,EAAE,MAAM;EACjB,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI;;AAIb,SAAS;EACP,UAAU,EAAE,KAAK",
-"sources": ["../scss/rumantara.scss"],
-"names": [],
-"file": "rumantara.css"
-}

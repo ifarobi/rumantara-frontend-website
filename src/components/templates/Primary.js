@@ -1,10 +1,10 @@
 import React from 'react'
 
-import HeaderPrimary from '../organisms/Header/Primary'
+import Header from '../organisms/Header'
 
 const Primary = ({ children }) => (
-  <div>
-    <HeaderPrimary />
+  <div className="primary-layout">
+    <Header />
     {children}
   </div>
 )

@@ -1,44 +1,68 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var appConfig = require('./app.js');
+const appConfig = require('./app.js');
+
+const extractToolbox = new ExtractTextPlugin('css/toolbox.css');
+const extractApp = new ExtractTextPlugin('css/app.css');
 
 module.exports = {
-  entry:[
-    path.join(__dirname, "../","src/index.js"),
-    ['webpack-dev-server/client?',appConfig.protocol,"://",appConfig.host,":",appConfig.port].join(""),
-    "webpack/hot/only-dev-server"
+  entry: [
+    path.join(__dirname, '../src/index.js'),
+    ['webpack-dev-server/client?', appConfig.protocol, '://', appConfig.host, ':', appConfig.port].join(''),
+    'webpack/hot/only-dev-server',
   ],
   output: {
-    path : path.resolve(__dirname,"../","public"),
-    publicPath : "/public/",
-    filename: "script.js"
+    path: path.resolve(__dirname, '../public'),
+    publicPath: '/public/',
+    filename: 'script.js',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('styles.css')
+    extractApp,
+    extractToolbox,
   ],
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname,"../src"),
+        include: path.resolve(__dirname, '../src'),
         use: [
           {
-            loader: 'react-hot-loader'
+            loader: 'react-hot-loader',
           },
           {
             loader: 'babel-loader',
-            options: {presets: ["es2015", "react", "stage-0"]}
-          }
-        ]
+            options: { presets: ['es2015', 'react', 'stage-0'] },
+          },
+        ],
       },
       {
         test: /\.css$/,
-        include: path.resolve(__dirname, "../src"),
-        use: ExtractTextPlugin.extract({
+        include: path.resolve(__dirname, '../node_modules/react-toolbox/lib'),
+        use: extractToolbox.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: "css-loader",
+              options: {
+                modules: true,
+                sourceMap: true,
+                importLoaders: 1,
+                localIdentName: "[name]--[local]--[hash:base64:8]"
+              }
+            },
+            "postcss-loader"
+          ]
+        })
+      },
+      {
+        test: /\.css$/,
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules/flexboxgrid/')],
+        exclude: path.resolve(__dirname, '../node_modules/react-toolbox/lib'),
+        use: extractApp.extract({
           fallback: 'style-loader',
           use: [
             {
@@ -47,13 +71,14 @@ module.exports = {
                 modules: true,
                 camelCase: true,
                 sourceMap: true,
-                localIdentName: '[name]__[local]--[hash:base64:5]'
-              }
+                importLoaders: 1,
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+              },
             }
           ]
-        })
+        }),
       }
-    ]
+    ],
   },
-  devtool: "#inline-source-map"
+  devtool: 'inline-source-map',
 };
