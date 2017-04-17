@@ -12,5 +12,12 @@
     "document": true,
     "localStorage": true,
     "fetch": true,
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./config/webpack.dev.js"
+        }
+      }
   }
 }
