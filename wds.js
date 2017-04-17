@@ -8,6 +8,7 @@ const server = new WebpackDevServer(webpack(webpackConfig), {
   hot: true,
   publicPath: webpackConfig.output.publicPath,
   historyApiFallback: true,
+  stats: {colors: true},
 });
 
 server.listen(appConfig.port, appConfig.host, function (err) {
