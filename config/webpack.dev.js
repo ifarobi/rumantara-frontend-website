@@ -24,6 +24,11 @@ module.exports = {
     extractApp,
     extractToolbox,
   ],
+  resolve: {
+    alias: {
+      config: path.join(__dirname, '../src/config/app.dev.js')
+    }
+  },
   module: {
     rules: [
       {

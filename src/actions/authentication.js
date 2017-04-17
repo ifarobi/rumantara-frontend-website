@@ -1,5 +1,8 @@
 import { push } from 'react-router-redux'
 import axios from 'axios'
+import cookie from 'react-cookie'
+import config from 'config'
+
 import {
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
@@ -10,8 +13,8 @@ import {
 } from '../constants/authentication'
 
 const loginUserSuccess = (token, user) => {
-  localStorage.setItem('access-token', token.accessToken)
-  localStorage.setItem('refresh-token', token.refreshToken)
+  cookie.save('access-token', token.accessToken)
+  cookie.save('refresh-token', token.refreshToken)
   return {
     type: LOGIN_USER_SUCCESS,
     payload: {
@@ -22,8 +25,8 @@ const loginUserSuccess = (token, user) => {
 }
 
 const loginUserFailure = (error) => {
-  localStorage.removeItem('access-token')
-  localStorage.removeItem('refresh-token')
+  cookie.remove('access-token')
+  cookie.remove('refresh-token')
   return {
     type: LOGIN_USER_FAILURE,
     payload: {
@@ -47,28 +50,28 @@ const logout = () => {
   }
 }
 
-const logoutAndRedirect = () => (dispatch, state) => {
+const logoutAndRedirect = (redirect = '/login') => (dispatch) => {
   dispatch(logout())
-  dispatch(push('/login'))
+  dispatch(push(redirect))
 }
 
 const loginUser = (email, password, redirect = '/') => (dispatch) => {
   dispatch(loginUserRequest())
-  axios.post('http://128.199.231.246:8080/oauth/token', {
+  axios.post(`${config.ROOT_URL}/oauth/token`, {
     'grant_type': 'password',
     'client_id': 2,
-    'client_secret': 'v59h5S6EN0Lyiy93uM8MGVSXkwTRyZ3XcTyenCvo',
+    'client_secret': config.CLIENT_SECRET,
     'username': email,
     'password': password,
   })
   .then((response) => {
-    console.log(response)
     dispatch(loginUserSuccess({
       accessToken: response.data.access_token,
       refreshToken: response.data.refresh_token,
     }, {
       email,
     }))
+    dispatch(push(redirect))
   })
   .catch((error) => {
     console.log(error)

@@ -10,11 +10,10 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import routes from './routes'
 import configureStore from './store/configureStore'
 
-const store = configureStore()
-const history = syncHistoryWithStore(
-  (Modernizr && Modernizr.history) ? browserHistory : hashHistory,
-  store,
-)
+let history = (Modernizr && Modernizr.history) ? browserHistory : hashHistory
+const store = configureStore(history)
+history = syncHistoryWithStore(history, store)
+
 
 ReactDom.render(
   <Provider store={store}>

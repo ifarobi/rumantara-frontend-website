@@ -1,10 +1,16 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
+import { routerMiddleware } from 'react-router-redux'
 import rootReducer from '../reducers'
 
-const configureStore = preloadedState => createStore(
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const configureStore = (history, preloadedState) => createStore(
   rootReducer,
   preloadedState,
-  compose(applyMiddleware(thunk),  window.devToolsExtension()),
+  composeEnhancers(
+    applyMiddleware(thunk, routerMiddleware(history)),
+  ),
 )
+
 export default configureStore
