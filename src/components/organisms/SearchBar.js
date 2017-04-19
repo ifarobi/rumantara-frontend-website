@@ -13,14 +13,14 @@ class SearchBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      destination: '',
+      destination: 'asdf',
       checkIn: '',
       checkOut: '',
     }
     this.handleChange = this.handleChange.bind(this)
   }
-  handleChange(value, event) {
-    this.setState({ ...this.state, [event.target.name]: value })
+  handleChange(val, key) {
+    this.setState({ ...this.state, [key.target.name]: val })
   }
   render() {
     return (
@@ -48,6 +48,7 @@ class SearchBar extends Component {
                         <DatePicker
                           label="Check In"
                           name="checkIn"
+                          autoOk={true}
                           value={this.state.checkIn}
                           onChange={this.handleChange}
                           sundayFirstDayOfWeek={true}
@@ -59,6 +60,7 @@ class SearchBar extends Component {
                       <Col xs={5}>
                         <DatePicker
                           label="Check Out"
+                          autoOk={true}
                           name="checkOut"
                           value={this.state.checkOut}
                           onChange={this.handleChange}

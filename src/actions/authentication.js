@@ -8,8 +8,6 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
   LOGOUT_USER,
-  FETCH_PROTECTED_REQUEST,
-  RECEIVE_PROTECTED_DATA,
 } from '../constants/authentication'
 
 const loginUserSuccess = (token, user) => {
@@ -79,22 +77,7 @@ const loginUser = (email, password, redirect = '/') => (dispatch) => {
   })
 }
 
-const receiveProtectedData = (data) => {
-  return {
-    type: RECEIVE_PROTECTED_DATA,
-    payload: {
-      data,
-    },
-  }
-}
-
-const fetchProtectedDataRequest = () => ({
-  type: FETCH_PROTECTED_REQUEST,
-})
-
 export {
-  fetchProtectedDataRequest,
-  receiveProtectedData,
   loginUser,
   loginUserRequest,
   loginUserFailure,

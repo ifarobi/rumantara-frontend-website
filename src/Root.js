@@ -1,8 +1,11 @@
 import React from 'react'
+import Primary from './components/templates/Primary'
 
 const Root = ({ children }) => (
   <div className="rumantaraRoot">
-    {children}
+    <Primary>
+      {children}
+    </Primary>
   </div>
 )
 

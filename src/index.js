@@ -14,7 +14,6 @@ let history = (Modernizr && Modernizr.history) ? browserHistory : hashHistory
 const store = configureStore(history)
 history = syncHistoryWithStore(history, store)
 
-
 ReactDom.render(
   <Provider store={store}>
     <Router

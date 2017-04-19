@@ -14,9 +14,9 @@ class RoomCardList extends Component {
     return this.props.data.map(d => (
       <Col key={d.id} xs={12} md={4}>
         <RoomCard
-          title={d.title}
-          image={d.image}
-          price={price(d.price)}
+          title={d.name}
+          image={(d.image) ? d.image : 'http://lorempixel.com/400/200/city'}
+          price={price(d.base_price)}
         />
       </Col>
       ))

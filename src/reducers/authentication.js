@@ -15,36 +15,32 @@ const initialState = {
 }
 
 export default createReducer(initialState, {
-  [LOGIN_USER_REQUEST]: (state, payload) => {
-    return Object.assign({}, state, {
+  [LOGIN_USER_REQUEST]: state =>
+    Object.assign({}, state, {
       isAuthenticating: true,
       statusText: null,
-    })
-  },
-  [LOGIN_USER_SUCCESS]: (state, payload) => {
-    return Object.assign({}, state, {
+    }),
+  [LOGIN_USER_SUCCESS]: (state, payload) =>
+    Object.assign({}, state, {
       user: payload.user,
       isAuthenticating: false,
       isAuthenticated: true,
       token: payload.token,
       statusText: 'You have been successfully logged in.',
-    })
-  },
-  [LOGIN_USER_FAILURE]: (state, payload) => {
-    return Object.assign({}, state, {
+    }),
+  [LOGIN_USER_FAILURE]: (state, payload) =>
+    Object.assign({}, state, {
       user: null,
       isAuthenticating: false,
       isAuthenticated: false,
       token: null,
       statusText: `Authentication Error: [${payload.status}] ${payload.statusText}`,
-    })
-  },
-  [LOGOUT_USER]: (state, payload) => {
-    return Object.assign({}, state, {
+    }),
+  [LOGOUT_USER]: state =>
+    Object.assign({}, state, {
       isAuthenticated: false,
       token: null,
       user: null,
       statusText: 'You have been successfully logged out.',
-    })
-  },
+    }),
 })
