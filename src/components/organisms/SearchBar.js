@@ -18,9 +18,17 @@ class SearchBar extends Component {
       checkOut: '',
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleCheckIn = this.handleCheckIn.bind(this)
+    this.handleCheckOut = this.handleCheckOut.bind(this)
   }
-  handleChange(val, key) {
-    this.setState({ ...this.state, [key.target.name]: val })
+  handleCheckIn(val) {
+    this.setState({ checkIn: val })
+  }
+  handleCheckOut(val) {
+    this.setState({ checkOut: val })
+  }
+  handleChange(val) {
+    this.setState({ destination: val })
   }
   render() {
     return (
@@ -50,7 +58,7 @@ class SearchBar extends Component {
                           name="checkIn"
                           autoOk={true}
                           value={this.state.checkIn}
-                          onChange={this.handleChange}
+                          onChange={this.handleCheckIn}
                           sundayFirstDayOfWeek={true}
                         />
                       </Col>
@@ -63,7 +71,7 @@ class SearchBar extends Component {
                           autoOk={true}
                           name="checkOut"
                           value={this.state.checkOut}
-                          onChange={this.handleChange}
+                          onChange={this.handleCheckOut}
                           sundayFirstDayOfWeek={true}
                         />
                       </Col>
