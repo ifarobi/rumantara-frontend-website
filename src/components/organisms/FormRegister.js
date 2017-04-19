@@ -3,16 +3,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Input from 'react-toolbox/lib/input'
 import Button from 'react-toolbox/lib/button'
+import axios from 'axios'
+import config from 'config'
 
-import { registerUser } from '../../actions/authentication'
+import { loginUser } from '../../actions/authentication'
 
 import style from './styles/FormLogin.css'
 
-class FormLogin extends Component {
+class FormRegister extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: 'test@rumantara.com',
+      email: 'tes@rumantara.com',
       password: 'secret',
       name: 'Test Register',
     }
@@ -24,7 +26,17 @@ class FormLogin extends Component {
   }
   handleSubmit(e) {
     e.preventDefault()
-    this.props.registerUser(this.state.email, this.state.password, '/')
+    const { email, password, name } = this.state
+    axios.post(`${config.API_URL}/register`, {
+      email,
+      name,
+      password,
+    })
+    .then((response) => {
+      if (response.status === 201) {
+        this.props.loginUser(email, password)
+      }
+    })
   }
   render() {
     return (
@@ -66,12 +78,12 @@ class FormLogin extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticating: state.auth.isAuthenticating,
+  isAuthenticated: state.auth.isAuthenticated,
   statusText: state.auth.statusText,
 })
 
 const mapDispatchToProps = dispatch => ({
-  registerUser: bindActionCreators(registerUser, dispatch),
+  loginUser: bindActionCreators(loginUser, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormLogin)
+export default connect(mapStateToProps, mapDispatchToProps)(FormRegister)
