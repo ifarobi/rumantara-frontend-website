@@ -1,3 +1,6 @@
 node_modules/
 .sass-cache/
 .DS_Store
+script.bundle.js
+script.bundle.js.map
+server.bundle.js

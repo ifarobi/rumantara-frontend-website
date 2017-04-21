@@ -33,7 +33,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, '../client'),
+        include: [path.resolve(__dirname, '../client'), path.resolve(__dirname, '../common')],
         use: [
           {
             loader: 'react-hot-loader',

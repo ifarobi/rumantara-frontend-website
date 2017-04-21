@@ -46,7 +46,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, '../client'),
+        include: [path.resolve(__dirname, '../client'), path.resolve(__dirname, '../common')],
         use: [
           {
             loader: 'babel-loader',
@@ -75,7 +75,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: [path.resolve(__dirname, '../client'), path.resolve(__dirname, '../node_modules/flexboxgrid/')],
+        include: path.resolve(__dirname, '../client'),
         exclude: path.resolve(__dirname, '../node_modules/react-toolbox/lib'),
         use: extractApp.extract({
           fallback: 'style-loader',
