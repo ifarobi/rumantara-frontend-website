@@ -10,14 +10,14 @@ const extractApp = new ExtractTextPlugin('css/app.css');
 
 module.exports = {
   entry: [
-    path.join(__dirname, '../src/index.js'),
+    path.join(__dirname, '../client/index.js'),
     ['webpack-dev-server/client?', appConfig.protocol, '://', appConfig.host, ':', appConfig.port].join(''),
     'webpack/hot/only-dev-server',
   ],
   output: {
     path: path.resolve(__dirname, '../public'),
     publicPath: '/public/',
-    filename: 'script.js',
+    filename: 'script.bundle.js',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -26,14 +26,14 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      config: path.join(__dirname, '../src/config/app.dev.js')
+      config: path.join(__dirname, '../client/config/app.dev.js')
     }
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, '../src'),
+        include: path.resolve(__dirname, '../client'),
         use: [
           {
             loader: 'react-hot-loader',
@@ -65,7 +65,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules/flexboxgrid/')],
+        include: [path.resolve(__dirname, '../client'), path.resolve(__dirname, '../node_modules/flexboxgrid/')],
         exclude: path.resolve(__dirname, '../node_modules/react-toolbox/lib'),
         use: extractApp.extract({
           fallback: 'style-loader',

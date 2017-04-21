@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Grid, Row, Col } from 'react-flexbox-grid'
 
-import price from '../../helpers/price'
+import price from '../../../common/helpers/price'
 
 import RoomCard from '../molecules/RoomCard'
 
@@ -12,22 +11,22 @@ class RoomCardList extends Component {
   }
   renderCards() {
     return this.props.data.map(d => (
-      <Col key={d.id} xs={12} md={4}>
+      <div className="col-xs-12 col-md-4" key={d.id}>
         <RoomCard
           title={d.name}
           image={(d.image) ? d.image : 'http://lorempixel.com/400/200/city'}
           price={price(d.base_price)}
         />
-      </Col>
+      </div>
       ))
   }
   render() {
     return (
-      <Grid fluid={true} className="grid-only-pad-xs">
-        <Row>
+      <div className="grid-only-pad-xs">
+        <div className="row">
           {this.renderCards()}
-        </Row>
-      </Grid>
+        </div>
+      </div>
     )
   }
 }

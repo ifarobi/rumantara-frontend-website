@@ -6,7 +6,7 @@ import Button from 'react-toolbox/lib/button'
 import axios from 'axios'
 import config from 'config'
 
-import { loginUser } from '../../actions/authentication'
+import { loginUser } from '../../../common/actions/authentication'
 
 import style from './styles/FormLogin.css'
 

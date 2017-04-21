@@ -5,7 +5,7 @@ import Input from 'react-toolbox/lib/input'
 import Checkbox from 'react-toolbox/lib/checkbox'
 import Button from 'react-toolbox/lib/button'
 
-import { loginUser } from '../../actions/authentication'
+import { loginUser } from '../../../common/actions/authentication'
 
 import style from './styles/FormLogin.css'
 

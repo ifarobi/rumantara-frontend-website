@@ -4,8 +4,12 @@
   "main": "index.js",
   "author": "ilhamfarobi@gmail.com",
   "scripts": {
-    "dev": "node wds.js",
-    "build": "./node_modules/webpack/bin/webpack.js  --verbose --color --display-error-details --config ./config/webpack.prod.js"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "node wds.js",
+    "start:prod": "npm run build && node ./server/server.bundle.js",
+    "build:client": "webpack  --verbose --color --display-error-details --config ./config/webpack.prod.js",
+    "build:server": "webpack --config ./config/server/webpack.js",
+    "build": "npm run build:client && npm run build:server"
   },
   "license": "MIT",
   "dependencies": {
@@ -16,9 +20,12 @@
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
+    "babel-register": "^6.24.1",
     "classnames": "^2.2.5",
     "css-loader": "^0.28.0",
+    "express": "^4.15.2",
     "extract-text-webpack-plugin": "^2.1.0",
+    "if-env": "^1.0.0",
     "numeral": "^2.0.6",
     "postcss-cssnext": "^2.10.0",
     "postcss-each": "^0.9.3",
@@ -38,7 +45,9 @@
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.16.1",
     "webpack": "^2.3.3",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-hot-middleware": "^2.18.0"
   },
   "devDependencies": {
     "eslint": "^3.15.0",

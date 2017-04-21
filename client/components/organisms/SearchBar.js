@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import { Grid, Row, Col } from 'react-flexbox-grid'
 
 import Input from 'react-toolbox/lib/input'
 import Button from 'react-toolbox/lib/button'
@@ -34,9 +33,9 @@ class SearchBar extends Component {
     return (
       <div className={classnames(style.searchContainer, 'pageContainer')}>
         <form>
-          <Grid fluid={true} className="no-right-pad no-left-pad-xs">
-            <Row>
-              <Col xs={12} md={6}>
+          <div className="no-right-pad no-left-pad-xs">
+            <div className="row">
+              <div className="col-xs-12 col-md-6">
                 <Input
                   id="destination"
                   type="text"
@@ -47,12 +46,12 @@ class SearchBar extends Component {
                   onChange={this.handleChange}
                   value={this.state.destination}
                 />
-              </Col>
-              <Col xs={12} md={6}>
-                <Row>
-                  <Col xs={12} md={8}>
-                    <Row>
-                      <Col xs={5}>
+              </div>
+              <div className="col-xs-12 col-md-6">
+                <div className="row">
+                  <div className="col-xs-12 col-md-8">
+                    <div className="row">
+                      <div className="col-xs-5">
                         <DatePicker
                           label="Check In"
                           name="checkIn"
@@ -61,11 +60,11 @@ class SearchBar extends Component {
                           onChange={this.handleCheckIn}
                           sundayFirstDayOfWeek={true}
                         />
-                      </Col>
-                      <Col xs={2}>
+                      </div>
+                      <div className="col-xs-2">
                         <FontIcon value="keyboard_arrow_right" className={style.arrowDate} />
-                      </Col>
-                      <Col xs={5}>
+                      </div>
+                      <div className="col-xs-5">
                         <DatePicker
                           label="Check Out"
                           autoOk={true}
@@ -74,10 +73,10 @@ class SearchBar extends Component {
                           onChange={this.handleCheckOut}
                           sundayFirstDayOfWeek={true}
                         />
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col xs={12} md={4} className="no-right-pad">
+                      </div>
+                    </div>
+                  </div>
+                  <div className="no-right-pad col-xs-12 col-md-4">
                     <Button
                       className={classnames(style.buttonSearch, 'no-box-shadow', 'no-radius')}
                       primary={true}
@@ -86,11 +85,11 @@ class SearchBar extends Component {
                       icon="search"
                       type="submit"
                     />
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Grid>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     )

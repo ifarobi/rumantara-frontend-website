@@ -8,7 +8,7 @@ import { Router, browserHistory, hashHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import routes from './routes'
-import configureStore from './store/configureStore'
+import configureStore from '../common/store/configureStore'
 
 let history = (Modernizr && Modernizr.history) ? browserHistory : hashHistory
 const store = configureStore(history)

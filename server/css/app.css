@@ -1,0 +1,123 @@
+.Header__headerContainer--22-sT{
+  background: white;
+  color: #333;
+}
+.Header__headerContainer--22-sT a{
+  color: #6060e2;
+}
+.Header__logoContainer--1b6iQ{
+  height: 100%;
+  padding: 15px 5px;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+.Header__logoContainer--1b6iQ img{
+  height: 100%;
+}
+.Header__navAnchor--2YPal{
+  padding: 23px 15px;
+}
+.Header__leftIcon--C2dO5{
+  color: #6060e2 !important;
+}
+.SearchBar__searchContainer--1FYkw{
+  margin-top:80px;
+  background: white;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0,0,0,.6);
+}
+.SearchBar__buttonSearch--2lOMS{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  height: 100%;
+}
+.SearchBar__arrowDate--3pOb3{
+  font-size: 35px;
+  margin-top: 25px;
+  color: rgba(0, 0, 0, 0.26);
+}
+.Hero__heroContainer--2oqTj{
+  width: 100%;
+  background-size: cover;
+  padding: 50px;
+}
+.RoomCard__card--13GxI{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.RoomCard__cardTitle--1yMq4{
+  background: rgba(0, 0, 0, 0.35);
+  background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.55), rgba(0,0,0,0.85));
+}
+.RoomCard__cardActions--dg7DJ{
+  justify-content: space-between;
+}
+.RoomCard__title--1z9-b{
+  font-size: 18px !important;
+}
+.RoomCard__price--lKxY-{
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+}
+.RoomCard__rate--2ykhp{
+  position: absolute;
+  right: 16px;
+  bottom: 20px;
+  color: white;
+}
+.RoomCard__rate--2ykhp span{
+  float: left;
+}
+.RoomCard__rate--2ykhp span:nth-child(2){
+  font-size: 16px;
+  margin-top: 5px;
+}
+.CardListTitle__cardListTitleContainer--2wPrm{
+  margin-top: 30px;
+}
+.CardListTitle__cardListTitleContainer--2wPrm h2{
+  font-weight: 300;
+}
+.CardListTitle__cardListTitleContainer--2wPrm hr{
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 1em 0;
+  padding: 0;
+}
+
+@media only screen and (max-width: 63em){
+  .CardListTitle__cardListTitleContainer--2wPrm{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+.Home__heroHome--1qbPm{
+  color: white;
+  text-align: center;
+}
+.Home__textHero--1NH1I{
+  font-size: 48px;
+  font-weight: 300;
+  margin-top: 50px;
+}
+@media only screen and (max-width: 63em){
+  .Home__textHero--1NH1I{
+    font-size: 36px;
+  }
+}
+.FormLogin__formLoginContainer--Vleh3{
+
+}
+.Login__wrapperLogin--2fer-{
+  max-width: 448px;
+  padding: 32px;
+  border: 1px solid #dce0e0;
+  margin: auto;
+}

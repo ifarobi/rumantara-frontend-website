@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import config from 'config'
 import axios from 'axios'
 
-import { requestProgress, requestDone } from '../actions/request'
+import { requestProgress, requestDone } from '../../common/actions/request'
 import SearchBar from '../components/organisms/SearchBar'
 import Hero from '../components/organisms/Hero'
 import RoomCardList from '../components/organisms/RoomCardList'
