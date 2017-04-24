@@ -4,8 +4,10 @@ import FormRegister from '../components/organisms/FormRegister'
 import style from './styles/Login.css'
 
 const Register = () => (
-  <div className={style.wrapperLogin}>
-    <FormRegister />
+  <div className="pageContainer with-padding">
+    <div className={style.wrapperLogin}>
+      <FormRegister />
+    </div>
   </div>
 )
 

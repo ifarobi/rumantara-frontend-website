@@ -1,0 +1,8 @@
+.imageContainer{
+  display: block;
+  overflow: hidden;
+}
+.image{
+  width: 100%;
+  display: block;
+}

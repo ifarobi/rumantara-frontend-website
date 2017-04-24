@@ -8,12 +8,13 @@ import { Link } from 'react-router'
 import style from './styles/RoomCard.css'
 
 const RoomCard = ({
+  id,
   image,
   title,
   price,
 }) => (
   <Card theme={style}>
-    <Link to="#">
+    <Link to={`/room/${id}`}>
       <CardMedia
         aspectRatio="wide"
         image={image}
@@ -36,7 +37,9 @@ const RoomCard = ({
         <Button href="#" icon="share" />
       </div>
       <div className="flex-self-end">
-        <Button href="#" label="Detail" icon="search" />
+        <Link to={`/room/${id}`}>
+          <Button label="Detail" icon="search" />
+        </Link>
         <Button href="#" icon="add" label="Order" />
       </div>
     </CardActions>

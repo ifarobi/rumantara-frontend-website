@@ -23,6 +23,10 @@
   margin-right: auto;
   display: block;
 }
+.pageContainer.with-padding{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
 .no-pad{
   padding-left: 0;
   padding-right: 0;
@@ -70,6 +74,10 @@
 .flex-self-end{
   align-self: flex-end;
 }
+.btn-red{
+  background: #ef5682 !important;
+  color: white;
+}
 @media only screen and (max-width: 63em){
   .no-left-pad-xs{
     padding-left: 0
@@ -78,4 +86,14 @@
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+
+/* Misc Component Style */
+.panel{
+  border: 1px solid #dce0e0;
+  background-color: white;
+}
+.panel-body{
+  padding: 20px;
+  position: relative;
 }

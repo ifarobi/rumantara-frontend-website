@@ -1,6 +1,7 @@
 .headerContainer{
   background: white;
   color: #333;
+  border-bottom: 1px solid #DBDBDB !important;
 }
 .headerContainer :global a{
   color: #6060e2;
