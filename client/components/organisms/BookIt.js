@@ -9,10 +9,18 @@ import style from './styles/BookIt.css'
 class BookIt extends Component {
   constructor(props) {
     super(props)
+    const today = new Date()
+    const tomorrow = new Date()
+    const maxDate = new Date()
+    const minDate = new Date()
+    tomorrow.setDate(today.getDate() + this.props.minOrder)
     this.state = {
-      checkIn: '',
-      checkOut: '',
+      checkIn: today,
+      checkOut: tomorrow,
       person: 1,
+      maxDate: new Date(maxDate.setDate(today.getDate() + this.props.maxOrder)),
+      minDate: new Date(minDate.setDate(today.getDate() - 1)),
+      checkOutMinDate: new Date(minDate.setDate(today.getDate() - 1)),
     }
     this.persons = []
     for (let i = 0; i < this.props.maxPerson; i += 1) {
@@ -34,7 +42,17 @@ class BookIt extends Component {
     this.setState({ checkOut: val })
   }
   handleCheckIn(val) {
-    this.setState({ checkIn: val })
+    const newMaxDate = new Date(val)
+    const newCheckIn = new Date(val)
+    const newCheckOut = new Date(val)
+    newCheckOut.setDate(val.getDate() + this.props.minOrder)
+    newMaxDate.setDate(val.getDate() + this.props.maxOrder)
+    this.setState({
+      checkIn: newCheckIn,
+      checkOutMinDate: newCheckIn,
+      checkOut: newCheckOut,
+      maxDate: newMaxDate,
+    })
   }
   handlePerson(val) {
     this.setState({ person: val })
@@ -58,6 +76,7 @@ class BookIt extends Component {
                     label="Check In"
                     autoOk={true}
                     value={this.state.checkIn}
+                    minDate={this.state.minDate}
                     onChange={this.handleCheckIn}
                   />
                 </div>
@@ -65,6 +84,8 @@ class BookIt extends Component {
                   <DatePicker
                     label="Check Out"
                     autoOk={true}
+                    maxDate={this.state.maxDate}
+                    minDate={this.state.checkOutMinDate}
                     value={this.state.checkOut}
                     onChange={this.handleCheckOut}
                   />

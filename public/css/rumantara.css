@@ -12,7 +12,14 @@
 .rumantaraRoot{
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
-  color: #2c3e50;
+  color: #5A6269;
+}
+.default-anchor{
+  color: inherit;
+  text-decoration: none;
+}
+.default-anchor:hover{
+  text-decoration: underline;
 }
 .anchor{
   text-decoration: none;
