@@ -11,8 +11,13 @@
 /*DEFAULT STYLE*/
 .rumantaraRoot{
   font-family: 'Roboto', sans-serif;
-  font-size: 14px;
+  font-size: 17px;
+  font-weight: 300;
   color: #5A6269;
+}
+p{
+  line-height: 22px;
+  margin-bottom: 15px;
 }
 .default-anchor{
   color: inherit;
@@ -33,6 +38,15 @@
 .pageContainer.with-padding{
   padding-top: 30px;
   padding-bottom: 30px;
+}
+.section{
+  margin-bottom: 25px;
+}
+.section-hr{
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border: 0;
+  border-top: 1px solid #dce0e0;
 }
 .no-pad{
   padding-left: 0;

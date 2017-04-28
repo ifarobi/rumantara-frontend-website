@@ -1,0 +1,7 @@
+.sectionTitleContainer{
+  padding: 10px 0;
+  border-bottom: 1px solid #dce0e0;
+}
+.sectionTitleContainer :global h2{
+  font-weight: 300
+}

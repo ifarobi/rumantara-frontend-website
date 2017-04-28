@@ -11,10 +11,13 @@ import style from './styles/SearchBar.css'
 class SearchBar extends Component {
   constructor(props) {
     super(props)
+    const today = new Date()
+    const tomorrow = new Date()
+    tomorrow.setDate(today.getDate() + 1)
     this.state = {
       destination: 'asdf',
-      checkIn: '',
-      checkOut: '',
+      checkIn: today,
+      checkOut: tomorrow,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleCheckIn = this.handleCheckIn.bind(this)
