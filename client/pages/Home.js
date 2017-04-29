@@ -20,6 +20,7 @@ class Home extends Component {
       roomData: [],
     }
     this.renderRoomList = this.renderRoomList.bind(this)
+    this.renderPopularCity = this.renderPopularCity.bind(this)
   }
   componentWillMount() {
     requestProgress()
@@ -50,6 +51,97 @@ class Home extends Component {
       </section>
     )
   }
+  renderPopularCity() {
+    return (
+      <section className="pageContainer">
+        <SectionTitle label="Favorite Destination" />
+        <div className="row">
+          <div className="col-xs-12 col-sm-6 col-md-8">
+            <div className={style.cityCard}>
+              <div className={style.cityCover}>
+                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+              </div>
+              <div className={style.cityCardOverlay}>
+                <div className={style.cityCardContent}>
+                  <span><b>Bali</b></span>
+                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xs-12 col-sm-6 col-md-4">
+            <div className={style.cityCard}>
+              <div className={style.cityCover}>
+                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+              </div>
+              <div className={style.cityCardOverlay}>
+                <div className={style.cityCardContent}>
+                  <span><b>Bali</b></span>
+                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-6 col-md-4">
+            <div className={style.cityCard}>
+              <div className={style.cityCover}>
+                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+              </div>
+              <div className={style.cityCardOverlay}>
+                <div className={style.cityCardContent}>
+                  <span><b>Bali</b></span>
+                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xs-12 col-sm-6 col-md-8">
+            <div className={style.cityCard}>
+              <div className={style.cityCover}>
+                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+              </div>
+              <div className={style.cityCardOverlay}>
+                <div className={style.cityCardContent}>
+                  <span><b>Bali</b></span>
+                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-6 col-md-8">
+            <div className={style.cityCard}>
+              <div className={style.cityCover}>
+                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+              </div>
+              <div className={style.cityCardOverlay}>
+                <div className={style.cityCardContent}>
+                  <span><b>Bali</b></span>
+                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xs-12 col-sm-6 col-md-4">
+            <div className={style.cityCard}>
+              <div className={style.cityCover}>
+                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+              </div>
+              <div className={style.cityCardOverlay}>
+                <div className={style.cityCardContent}>
+                  <span><b>Bali</b></span>
+                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
   render() {
     return (
       <div>
@@ -72,6 +164,7 @@ class Home extends Component {
           <SearchBar />
         </Hero>
         {this.renderRoomList()}
+        {this.renderPopularCity()}
       </div>
     )
   }

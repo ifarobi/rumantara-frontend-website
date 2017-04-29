@@ -12,3 +12,58 @@
     font-size: 36px;
   }
 }
+
+.cityCard{
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+}
+.cityCover {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  z-index: 1;
+  width: 200%;
+  height: 200%;
+}
+.imageBg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+  overflow-x: hidden;
+}
+.cityCardOverlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  color: white;
+  background: rgba(0,0,0,.4);
+}
+.cityCardContent{
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.cityCardContent :global span{
+  font-size: 18px;
+}
+.cityCardContent :global p{
+  font-size: 14px;
+}

@@ -1,6 +1,10 @@
 .sectionTitleContainer{
-  padding: 10px 0;
+  padding-top:10px;
+}
+.sectionTitleContainer :global hr{
+  border: none;
   border-bottom: 1px solid #dce0e0;
+  margin: 10px 0;
 }
 .sectionTitleContainer :global h2{
   font-weight: 300
