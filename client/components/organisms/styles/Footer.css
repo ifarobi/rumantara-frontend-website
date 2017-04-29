@@ -1,0 +1,55 @@
+.footerContainer{
+  background: #6060e2;
+  color: white;
+  margin-top: 30px;
+  padding: 25px 0;
+}
+.footerContainer :global .sectionFooter{
+  padding: 0 30px;
+}
+.title{
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.listLinkFooter{
+  list-style: none;
+}
+.listLinkFooter :global li{
+  padding-bottom: 8px;
+}
+.listLinkFooter :global li a{
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+}
+.listLinkFooter :global li a:hover{
+  text-decoration: underline;
+}
+.socialContainer{
+  width: 100%;
+}
+.socialContainer :global a{
+  width: 35px;
+  color: #6060e2;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  height: 35px;
+  margin: 0 5px;
+  background: white;
+  line-height: 37px;
+  border-radius: 25px;
+  text-decoration: none;
+}
+.socialContainer :global a:first-child{
+  margin-left: 0
+}
+.copyright{
+  padding-top: 25px;
+  margin-top: 20px;
+  border-top: 1px solid #a7a7ef;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+}

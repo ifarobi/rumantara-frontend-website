@@ -7,6 +7,7 @@ import axios from 'axios'
 import { requestProgress, requestDone } from '../../common/actions/request'
 import SearchBar from '../components/organisms/SearchBar'
 import Hero from '../components/organisms/Hero'
+import SectionTitle from '../components/atoms/SectionTitle'
 import RoomCardList from '../components/organisms/RoomCardList'
 import CardListTitle from '../components/molecules/CardListTitle'
 
@@ -35,7 +36,7 @@ class Home extends Component {
     if (this.state.roomData) {
       return (
         <section className="pageContainer">
-          <CardListTitle text="For You" />
+          <SectionTitle label="For You" />
           <RoomCardList
             data={this.state.roomData}
           />

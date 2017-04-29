@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import price from '../../../common/helpers/price'
-
 import RoomCard from '../molecules/RoomCard'
 
 class RoomCardList extends Component {
