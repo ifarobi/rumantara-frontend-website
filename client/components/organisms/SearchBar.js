@@ -15,7 +15,7 @@ class SearchBar extends Component {
     const tomorrow = new Date()
     tomorrow.setDate(today.getDate() + 1)
     this.state = {
-      destination: 'asdf',
+      destination: '',
       checkIn: today,
       checkOut: tomorrow,
     }
