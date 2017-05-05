@@ -66,7 +66,7 @@ const Footer = () => (
       </div>
     </div>
     <div className={style.copyright}>
-      &copy; Rumantara. All Rights Reserved.
+      Made with &hearts; by Rumantara. All Rights Reserved.
     </div>
   </div>
 )
