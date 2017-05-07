@@ -4,6 +4,7 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
   LOGOUT_USER,
+  AUTHENTICATED,
 } from '../constants/authentication'
 
 const initialState = {
@@ -42,5 +43,13 @@ export default createReducer(initialState, {
       token: null,
       user: null,
       statusText: 'You have been successfully logged out.',
+    }),
+  [AUTHENTICATED]: (state, payload) =>
+    Object.assign({}, state, {
+      user: payload.user,
+      isAuthenticating: false,
+      isAuthenticated: true,
+      token: payload.token,
+      statusText: 'You have been successfully logged in.',
     }),
 })

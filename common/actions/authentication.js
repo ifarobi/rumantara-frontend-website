@@ -13,7 +13,7 @@ import {
 const loginUserSuccess = (token, user) => {
   cookie.save('access-token', token.accessToken)
   cookie.save('refresh-token', token.refreshToken)
-  console.log(user)
+  cookie.save('user', user)
   return {
     type: LOGIN_USER_SUCCESS,
     payload: {
@@ -26,6 +26,7 @@ const loginUserSuccess = (token, user) => {
 const loginUserFailure = (error) => {
   cookie.remove('access-token')
   cookie.remove('refresh-token')
+  cookie.remove('user')
   return {
     type: LOGIN_USER_FAILURE,
     payload: {
@@ -54,7 +55,7 @@ const logoutAndRedirect = (redirect = '/login') => (dispatch) => {
   dispatch(push(redirect))
 }
 
-const getUserDetail = (token, email) => (dispatch) => {
+const getUserDetail = (token, email, redirect) => (dispatch) => {
   axios.get(
     `${config.API_URL}/users/get-by-email/${email}`,
     {
@@ -86,7 +87,7 @@ const loginUser = (email, password, redirect = '/') => (dispatch) => {
     'password': password,
   })
   .then((response) => {
-    getUserDetail(response.data, email)(dispatch)
+    getUserDetail(response.data, email, redirect)(dispatch)
   })
   .catch((error) => {
     console.log(error)
