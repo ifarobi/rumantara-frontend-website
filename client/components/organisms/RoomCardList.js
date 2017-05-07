@@ -14,7 +14,7 @@ class RoomCardList extends Component {
         <RoomCard
           title={d.name}
           id={d.id}
-          image={(d.image) ? d.image : 'http://lorempixel.com/400/200/city'}
+          image={(d.room_pictures.length >= 0) ? d.room_pictures[0].url : 'http://lorempixel.com/400/200/city'}
           price={price(d.base_price)}
         />
       </div>

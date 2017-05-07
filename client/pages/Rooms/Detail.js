@@ -22,9 +22,12 @@ class Detail extends Component {
     this.state = {
       amenities: [],
       room: null,
+      roomRate: [],
     }
     this.renderAmenities = this.renderAmenities.bind(this)
     this.renderImage = this.renderImage.bind(this)
+    this.renderRate = this.renderRate.bind(this)
+    this.renderRoomDetail = this.renderRoomDetail.bind(this)
   }
   componentWillMount() {
     this.props.requestProgress()
@@ -44,6 +47,14 @@ class Detail extends Component {
          .catch((error) => {
            this.props.requestDone(error.response.status, error.response.statusText)
          })
+    axios.get(`${config.API_URL}/room-feedbacks/get-by-room/${this.props.params.id}`)
+        .then((response) => {
+          this.props.requestDone(response.status, response.statusText)
+          this.setState({ roomRate: response.data })
+        })
+        .catch((error) => {
+          this.props.requestDone(error.response.status, error.response.statusText)
+        })
   }
   renderAmenities() {
     const { amenities, room } = this.state
@@ -93,52 +104,83 @@ class Detail extends Component {
       />
     )
   }
+  renderRate() {
+    const { roomRate } = this.state
+    if (roomRate.length > 0) {
+      let totalRate = 0
+      console.log(roomRate)
+      roomRate.forEach((d) => {
+        totalRate += d.rating
+      })
+      const rate = totalRate / roomRate.length
+      let iconRate = ''
+      if (rate >= 5) iconRate = 'star'
+      else if (rate > 2) iconRate = 'star_half'
+      else iconRate = 'star_border'
+      return (
+        <div className={style.rate}>
+          <div>
+            <FontIcon className={style.rateIcon} value={iconRate} />
+          </div>
+          <div className={style.rateText}>
+            <b>{rate}</b>
+          </div>
+          <div>
+            <Anchor to="#">
+              {roomRate.length} reviews
+            </Anchor>
+          </div>
+        </div>
+      )
+    }
+    return <div className="text-center">Calculating...</div>
+  }
+  renderRoomDetail() {
+    const { room } = this.state
+    if (room !== null) {
+      return (
+        <div>
+          <div className="row section">
+            <div className="col-xs-12 col-md-9">
+              <h1 className={style.title}>{room.name}</h1>
+              <span className={style.address}>{room.address}</span>
+            </div>
+            <div className="col-xs-12 col-md-3">
+              {this.renderRate()}
+            </div>
+          </div>
+          <section className="section">
+            <SectionTitle label="Overview" />
+            <h3 className={style.subtitleSection}>About this listing</h3>
+            <p>{room.description}</p>
+          </section>
+          <hr className="section-hr" />
+          <section className="section">
+            <div className="row">
+              <div className="col-xs-12 col-md-3">
+                <b>Amenities</b>
+              </div>
+              <div className="col-xs-12 col-md-9">
+                <div className="row">
+                  {this.renderAmenities()}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      )
+    }
+    return <div className="text-center">Loading...</div>
+  }
   render() {
     return (
       <div className="pageContainer room_dls with-padding">
         <div className="row">
           <div className="col-xs-12 col-md-8 ext-muted">
-            {this.renderImage()}
-            <div className="row section">
-              <div className="col-xs-12 col-md-9">
-                <h1 className={style.title}>Rumah murah di samping sungai</h1>
-                <span className={style.address}>Rotterdam, South Holland, Netherlands</span>
-              </div>
-              <div className="col-xs-12 col-md-3">
-                <div className={style.rate}>
-                  <div>
-                    <FontIcon className={style.rateIcon} value="star_half" />
-                  </div>
-                  <div className={style.rateText}>
-                    <b>4.5</b>
-                  </div>
-                  <div>
-                    <Anchor to="#">
-                      322 reviews
-                    </Anchor>
-                  </div>
-                </div>
-              </div>
+            <div className={style.imageContainer}>
+              {this.renderImage()}
             </div>
-            <section className="section">
-              <SectionTitle label="Overview" />
-              <h3 className={style.subtitleSection}>About this listing</h3>
-              <p>For each rental, $50 will be donated to Raphael House, a San Francisco organization whose goal is to help at-risk families achieve stable housing and financial independence.</p>
-              <p>This little a-frame cabin would make a productive retreat for an artist, writer, or musician, or a romantic getaway. Surrounded by redwoods on a private road in Cazadero, my cabin is an hour and forty-five minutes north of San Francisco: a roughly ten-minute drive to the beautiful Sonoma Coast, and just fifteen minutes to Guerneville and wine country in the other direction. Head west and you’ll hit the charming town of Duncans Mills; go east to Monte Rio, and catch a movie at the historic Rio Theater.</p>
-            </section>
-            <hr className="section-hr" />
-            <section className="section">
-              <div className="row">
-                <div className="col-xs-12 col-md-3">
-                  <b>Amenities</b>
-                </div>
-                <div className="col-xs-12 col-md-9">
-                  <div className="row">
-                    {this.renderAmenities()}
-                  </div>
-                </div>
-              </div>
-            </section>
+            {this.renderRoomDetail()}
           </div>
           <div className="col-xs-12 col-md-4">
             <BookIt

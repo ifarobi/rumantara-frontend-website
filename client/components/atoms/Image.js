@@ -28,4 +28,8 @@ Image.propTypes = {
   full: React.PropTypes.bool,
 }
 
+Image.defaultProps = {
+  full: false,
+}
+
 export default Image

@@ -1,3 +1,7 @@
+.imageContainer{
+  height: 357px;
+  width: 100%;
+}
 .title{
   font-weight: 400;
   font-size: 2em;
