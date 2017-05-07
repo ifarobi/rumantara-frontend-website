@@ -7,6 +7,7 @@ import config from 'config'
 import classnames from 'classnames'
 import { v4 } from 'uuid'
 
+import Spinner from '../../components/atoms/Spinner'
 import Anchor from '../../components/atoms/Anchor'
 import BookIt from '../../components/organisms/BookIt'
 import Image from '../../components/atoms/Image'
@@ -23,6 +24,7 @@ class Detail extends Component {
       room: null,
     }
     this.renderAmenities = this.renderAmenities.bind(this)
+    this.renderImage = this.renderImage.bind(this)
   }
   componentWillMount() {
     this.props.requestProgress()
@@ -48,9 +50,7 @@ class Detail extends Component {
     if (amenities.length >= 0 && room !== null) {
       const roomAmenities = room.room_amenities
       const amComponent = amenities.map((d) => {
-        const rA = roomAmenities.find((a) => {
-          return (a.id === d.id)
-        })
+        const rA = roomAmenities.find(a => (a.amenity.id === d.id))
         if (typeof rA !== 'undefined') {
           return (
             <div key={v4()} className="col-xs-12 col-sm-6">
@@ -73,16 +73,32 @@ class Detail extends Component {
     }
     return <div className="text-center">Loading...</div>
   }
+  renderImage() {
+    const { room } = this.state
+    if (room !== null) {
+      return (
+        <Image
+          src={room.room_pictures[0].url}
+          full={true}
+          alt={room.name}
+        />
+      )
+    }
+    return (
+      <Spinner
+        size={{
+          width: '100%',
+          height: '357px',
+        }}
+      />
+    )
+  }
   render() {
     return (
       <div className="pageContainer room_dls with-padding">
         <div className="row">
           <div className="col-xs-12 col-md-8 ext-muted">
-            <Image
-              src="http://lorempixel.com/800/400/city"
-              full={true}
-              alt="kotaku"
-            />
+            {this.renderImage()}
             <div className="row section">
               <div className="col-xs-12 col-md-9">
                 <h1 className={style.title}>Rumah murah di samping sungai</h1>

@@ -1,12 +1,5 @@
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { routerMiddleware } from 'react-router-redux'
-import rootReducer from '../reducers'
-
-const configureStore = (history, preloadedState) => createStore(
-  rootReducer,
-  preloadedState,
-  applyMiddleware(thunk, routerMiddleware(history)),
-)
-
-export default configureStore
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./configureStore.prod')
+} else {
+  module.exports = require('./configureStore.dev')
+}

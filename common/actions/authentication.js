@@ -13,6 +13,7 @@ import {
 const loginUserSuccess = (token, user) => {
   cookie.save('access-token', token.accessToken)
   cookie.save('refresh-token', token.refreshToken)
+  console.log(user)
   return {
     type: LOGIN_USER_SUCCESS,
     payload: {
@@ -53,6 +54,28 @@ const logoutAndRedirect = (redirect = '/login') => (dispatch) => {
   dispatch(push(redirect))
 }
 
+const getUserDetail = (token, email) => (dispatch) => {
+  axios.get(
+    `${config.API_URL}/users/get-by-email/${email}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
+  )
+  .then((response) => {
+    dispatch(loginUserSuccess({
+      accessToken: token.access_token,
+      refreshToken: token.refresh_token,
+    }, response.data.data))
+    dispatch(push(redirect))
+  })
+  .catch((error) => {
+    console.log(error)
+    dispatch(loginUserFailure(error))
+  })
+}
+
 const loginUser = (email, password, redirect = '/') => (dispatch) => {
   dispatch(loginUserRequest())
   axios.post(`${config.ROOT_URL}/oauth/token`, {
@@ -63,13 +86,7 @@ const loginUser = (email, password, redirect = '/') => (dispatch) => {
     'password': password,
   })
   .then((response) => {
-    dispatch(loginUserSuccess({
-      accessToken: response.data.access_token,
-      refreshToken: response.data.refresh_token,
-    }, {
-      email,
-    }))
-    dispatch(push(redirect))
+    getUserDetail(response.data, email)(dispatch)
   })
   .catch((error) => {
     console.log(error)

@@ -19,7 +19,7 @@ class Header extends Component {
       return (
         <Navigation type="horizontal">
           <Anchor className={style.navAnchor} to="/host">Be a Hoster</Anchor>
-          <Anchor className={style.navAnchor} to="/profile">{this.props.user.email}</Anchor>
+          <Anchor className={style.navAnchor} to="/profile">{this.props.user.name}</Anchor>
           <Anchor className={style.navAnchor} to="/logout">Logout</Anchor>
         </Navigation>
       )

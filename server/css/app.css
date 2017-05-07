@@ -22,6 +22,61 @@
 .Header__leftIcon--C2dO5{
   color: #6060e2 !important;
 }
+.Footer__footerContainer--5Tj8O{
+  background: #6060e2;
+  color: white;
+  margin-top: 30px;
+  padding: 25px 0;
+}
+.Footer__footerContainer--5Tj8O .sectionFooter{
+  padding: 0 30px;
+}
+.Footer__title--1ZRlY{
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.Footer__listLinkFooter--mw9Vi{
+  list-style: none;
+}
+.Footer__listLinkFooter--mw9Vi li{
+  padding-bottom: 8px;
+}
+.Footer__listLinkFooter--mw9Vi li a{
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+}
+.Footer__listLinkFooter--mw9Vi li a:hover{
+  text-decoration: underline;
+}
+.Footer__socialContainer--5OAPi{
+  width: 100%;
+}
+.Footer__socialContainer--5OAPi a{
+  width: 35px;
+  color: #6060e2;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  height: 35px;
+  margin: 0 5px;
+  background: white;
+  line-height: 37px;
+  border-radius: 25px;
+  text-decoration: none;
+}
+.Footer__socialContainer--5OAPi a:first-child{
+  margin-left: 0
+}
+.Footer__copyright--Lzxyy{
+  padding-top: 25px;
+  margin-top: 80px;
+  border-top: 1px solid #a7a7ef;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+}
 .SearchBar__searchContainer--1FYkw{
   margin-top:80px;
   background: white;
@@ -45,6 +100,17 @@
   width: 100%;
   background-size: cover;
   padding: 50px;
+}
+.SectionTitle__sectionTitleContainer--1HHms{
+  padding-top:10px;
+}
+.SectionTitle__sectionTitleContainer--1HHms hr{
+  border: none;
+  border-bottom: 1px solid #dce0e0;
+  margin: 10px 0;
+}
+.SectionTitle__sectionTitleContainer--1HHms h2{
+  font-weight: 300
 }
 .RoomCard__card--13GxI{
   margin-top: 0.5rem;
@@ -113,6 +179,61 @@
     font-size: 36px;
   }
 }
+
+.Home__cityCard--1e7Fa{
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+}
+.Home__cityCover--1d2Vi {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  z-index: 1;
+  width: 200%;
+  height: 200%;
+}
+.Home__imageBg--ONhuj{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+  overflow-x: hidden;
+}
+.Home__cityCardOverlay--nyEUS{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  color: white;
+  background: rgba(0,0,0,.4);
+}
+.Home__cityCardContent--2s505{
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.Home__cityCardContent--2s505 span{
+  font-size: 18px;
+}
+.Home__cityCardContent--2s505 p{
+  font-size: 14px;
+}
 .FormLogin__formLoginContainer--Vleh3{
 
 }
@@ -148,13 +269,6 @@
   width: 100%;
   display: block;
 }
-.SectionTitle__sectionTitleContainer--1HHms{
-  padding: 10px 0;
-  border-bottom: 1px solid #dce0e0;
-}
-.SectionTitle__sectionTitleContainer--1HHms h2{
-  font-weight: 300
-}
 .Room__title--3ZQJO{
   font-weight: 400;
   font-size: 2em;
@@ -179,4 +293,19 @@
 .Room__subtitleSection--1gDud{
   margin: 20px 0;
   font-weight: 500;
+}
+.Room__amenitiesIcon--2vL2n{
+  position: absolute;
+  top: -3px;
+}
+.Room__amenitiesComponent--M2DXf{
+  position: relative;
+  text-align: left;
+  margin-bottom: 15px;
+}
+.Room__amenitiesComponent--M2DXf strong{
+  padding-left: 28px;
+}
+.Room__amenitiesDisabled--14QT1{
+
 }
