@@ -50,7 +50,7 @@ const logout = () => {
   }
 }
 
-const logoutAndRedirect = (redirect = '/login') => (dispatch) => {
+const logoutAndRedirect = (redirect = '/') => (dispatch) => {
   dispatch(logout())
   dispatch(push(redirect))
 }
