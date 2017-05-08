@@ -28,6 +28,7 @@ class Detail extends Component {
     this.renderImage = this.renderImage.bind(this)
     this.renderRate = this.renderRate.bind(this)
     this.renderRoomDetail = this.renderRoomDetail.bind(this)
+    this.renderBookItComponent = this.renderBookItComponent.bind(this)
   }
   componentWillMount() {
     this.props.requestProgress()
@@ -172,6 +173,27 @@ class Detail extends Component {
     }
     return <div className="text-center">Loading...</div>
   }
+  renderBookItComponent() {
+    const { room } = this.state
+    if (room !== null) {
+      return (
+        <BookIt
+          price={price(2123000)}
+          maxPerson={room.capacity}
+          minOrder={room.min_stay}
+          maxOrder={room.max_stay}
+        />
+      )
+    }
+    return (
+      <Spinner
+        size={{
+          width: '100%',
+          height: '309px',
+        }}
+      />
+    )
+  }
   render() {
     return (
       <div className="pageContainer room_dls with-padding">
@@ -183,12 +205,7 @@ class Detail extends Component {
             {this.renderRoomDetail()}
           </div>
           <div className="col-xs-12 col-md-4">
-            <BookIt
-              price={price(2123000)}
-              maxPerson={5}
-              minOrder={2}
-              maxOrder={6}
-            />
+            {this.renderBookItComponent()}
           </div>
         </div>
       </div>
