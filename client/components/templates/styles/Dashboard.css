@@ -1,0 +1,19 @@
+.navContainer{
+  background: #4e5a75;
+}
+.navWrapper{
+  padding: 0;
+}
+.nav{
+  color: #bbb;
+  padding: 10px 15px;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 400;
+}
+.nav:hover{
+  color: white;
+}
+.nav:first-child {
+  padding-left: 0;
+}

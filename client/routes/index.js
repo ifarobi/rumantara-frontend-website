@@ -10,6 +10,8 @@ import Logout from '../pages/Logout'
 import Register from '../pages/Register'
 import Detail from '../pages/Rooms/Detail'
 
+import dashboard from './dashboard'
+
 const routes = (
   <Route path="/" component={Root}>
     <IndexRoute component={Home} />
@@ -17,6 +19,9 @@ const routes = (
     <Route path="logout" component={Logout} />
     <Route path="register" component={Register} />
     <Route path="room/:id" component={Detail} />
+
+    {dashboard}
+
   </Route>
 )
 

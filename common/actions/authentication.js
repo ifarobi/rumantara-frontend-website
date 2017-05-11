@@ -44,7 +44,9 @@ const loginUserRequest = () => {
 }
 
 const logout = () => {
-  localStorage.removeItem('access-token')
+  cookie.remove('access-token')
+  cookie.remove('refresh-token')
+  cookie.remove('user')
   return {
     type: LOGOUT_USER,
   }
