@@ -19,15 +19,20 @@ p{
   line-height: 22px;
   margin-bottom: 15px;
 }
-.default-anchor{
+.anchor{
+  text-decoration: none;
+  font-size: 14px;
+}
+.default.anchor{
   color: inherit;
   text-decoration: none;
 }
-.default-anchor:hover{
+.default.anchor:hover{
   text-decoration: underline;
 }
-.anchor{
-  text-decoration: none;
+.anchor.primary{
+  color:#ef5682;
+  font-weight: bold
 }
 .pageContainer{
   max-width: 1080px;

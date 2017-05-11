@@ -62,9 +62,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboardContainer">
         {this.renderNav()}
-        <div className="pageContainer">
-          {children}
-        </div>
+        {children}
       </div>
     )
   }

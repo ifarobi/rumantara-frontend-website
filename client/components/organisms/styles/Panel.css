@@ -1,0 +1,15 @@
+.panelContainer{
+  border: 1px solid #dce0e0;
+  margin-bottom: 24px;
+}
+.panelHeader{
+  border-bottom: 1px solid #dce0e0;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #484848;
+  font-weight: 500;
+  background-color: #edefed;
+}
+.panelBody{
+  padding: 20px;
+}

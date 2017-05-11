@@ -8,9 +8,11 @@ const Anchor = ({
   to,
   children,
   className,
+  primary,
   ...other
 }) => {
-  const cName = (typeof className !== 'undefined') ? classnames('anchor', className) : classnames('default-anchor')
+  let cName = (typeof className !== 'undefined') ? classnames('anchor', className) : 'default anchor'
+  cName = (primary === true) ? classnames(cName, 'primary') : cName
   return (
     <Link to={to} className={cName} {...other}>
       {children}
@@ -20,6 +22,10 @@ const Anchor = ({
 
 Anchor.propTypes = {
   to: React.PropTypes.string.isRequired,
+}
+
+Anchor.defaultProps = {
+  primary: false,
 }
 
 export default Anchor
