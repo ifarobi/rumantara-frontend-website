@@ -18,8 +18,10 @@ class Header extends Component {
     if (this.props.isAuthenticated) {
       return (
         <Navigation type="horizontal">
-          <Anchor className={style.navAnchor} to="/host">Be a Hoster</Anchor>
-          <Anchor className={style.navAnchor} to="/dashboard/profile">{this.props.user.name}</Anchor>
+          <Anchor className={style.navAnchor} to="/host">Host</Anchor>
+          <Anchor className={style.navAnchor} to="/dashboard/profile">
+            {this.props.user.name}
+          </Anchor>
           <Anchor className={style.navAnchor} to="/logout">Logout</Anchor>
         </Navigation>
       )

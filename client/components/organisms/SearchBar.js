@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
+import config from 'config'
+import { GoogleApiWrapper } from 'google-maps-react'
 
 import Input from 'react-toolbox/lib/input'
 import Button from 'react-toolbox/lib/button'
@@ -22,6 +24,14 @@ class SearchBar extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleCheckIn = this.handleCheckIn.bind(this)
     this.handleCheckOut = this.handleCheckOut.bind(this)
+    this.renderInputPlace = this.renderInputPlace.bind(this)
+    this.places = null
+    this.autoComplete = null
+  }
+  componentWillMount() {
+    if (this.places !== null) {
+      console.log(this.places)
+    }
   }
   handleCheckIn(val) {
     this.setState({ checkIn: val })
@@ -32,23 +42,49 @@ class SearchBar extends Component {
   handleChange(val) {
     this.setState({ destination: val })
   }
+  renderInputPlace() {
+    const { google, loaded } = this.props
+    if (loaded) {
+      if (this.places !== null) {
+        const autocomplete = new google.maps.places.Autocomplete(
+          this.places.refs.wrappedInstance.inputNode,
+          {types: ['geocode']}
+        )
+      }
+      return (
+        <Input
+          id="destination"
+          type="text"
+          icon="location_on"
+          label="Destination"
+          ref={(c) => { this.places = c }}
+          value={this.state.destination}
+          onChange={this.handleChange}
+          name="destination"
+        />
+      )
+    }
+    return (<Input
+      id="destination"
+      type="text"
+      icon="location_on"
+      hint="Loading..."
+      label="Loading"
+      name="destination"
+      disabled={true}
+    />)
+  }
   render() {
+
     return (
       <div className={classnames(style.searchContainer, 'pageContainer')}>
         <form>
           <div className="no-right-pad no-left-pad-xs">
             <div className="row">
               <div className="col-xs-12 col-md-6">
-                <Input
-                  id="destination"
-                  type="text"
-                  icon="location_on"
-                  hint="Destination"
-                  label="Destination"
-                  name="destination"
-                  onChange={this.handleChange}
-                  value={this.state.destination}
-                />
+                {this.renderInputPlace()}
+                {/* <input type="text"
+                onChange={this.handleChange} ref={(c) => { this.places = c }} /> */}
               </div>
               <div className="col-xs-12 col-md-6">
                 <div className="row">
@@ -99,4 +135,8 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar
+export default GoogleApiWrapper({
+  apiKey: config.GOOGLE_API_KEY,
+  libraries: ['places'],
+  version: '3.27'
+})(SearchBar)

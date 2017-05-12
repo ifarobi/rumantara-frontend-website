@@ -7,9 +7,9 @@ import Profile from '../pages/Dashboard/Profile'
 import DashboardPage from '../pages/Dashboard/Dashboard'
 
 const dashboard = (
-  <Route path="/dashboard" component={Dashboard}>
+  <Route path="dashboard" component={Dashboard}>
     <IndexRoute component={DashboardPage} />
-    <Route path="/profile" component={Profile} />
+    <Route path="profile" component={Profile} />
   </Route>
 )
 
