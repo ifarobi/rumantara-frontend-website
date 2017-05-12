@@ -11,6 +11,7 @@ import cookie from 'react-cookie'
 
 import Panel from '../../components/organisms/Panel'
 import UploadBox from '../../components/organisms/UploadBox'
+import { storage } from '../../../common/helpers/firebase'
 
 class Profile extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class Profile extends Component {
     this.handleChangeProfile = this.handleChangeProfile.bind(this)
     this.handleChangeBirtDate = this.handleChangeBirtDate.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.handleUpload = this.handleUpload.bind(this)
   }
   componentWillMount() {
     const user = cookie.load('user')
@@ -63,8 +65,8 @@ class Profile extends Component {
       gender,
       birth_date: `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`,
       phone_number,
-      profile_photo_url: 'nanti dari firebase',
-      ktp_photo_url: 'nanti dari firebase',
+      profile_photo_url,
+      ktp_photo_url,
       address,
       about_me,
     }, {
@@ -92,6 +94,7 @@ class Profile extends Component {
     const newUser = Object.assign(this.state.user, {
       profile: { data: newProfile },
     })
+    console.log(newUser)
     this.setState({ user: newUser })
   }
   handleChangeGender(val) {
@@ -120,6 +123,24 @@ class Profile extends Component {
       profile: { data: newProfile },
     })
     this.setState({ user: newUser })
+  }
+  handleUpload(file, name) {
+    console.log(file)
+    const storageRef = storage.ref()
+    const meta = {
+      contentType: 'image/jpeg',
+    }
+    const newImage = storageRef.child(`images/${file.name}`)
+    const handler = this.handleChangeProfile
+    newImage.put(file, meta).then((snap) => {
+      console.log("uploaded")
+      console.log(snap.downloadURL)
+      this.handleChangeProfile(snap.downloadURL, {
+        target: {
+          name,
+        },
+      })
+    })
   }
   render() {
     const {
@@ -174,6 +195,9 @@ class Profile extends Component {
                   center={true}
                   width="150px"
                   height="150px"
+                  onUpload={(file) => {
+                    this.handleUpload(file, 'profile_photo_url')
+                  }}
                 />
               </div>
               <div className="col-xs-12 col-sm-6">
@@ -181,6 +205,9 @@ class Profile extends Component {
                   title="ID Card Photo"
                   name="ktp_photo_url"
                   center={true}
+                  onUpload={(file) => {
+                    this.handleUpload(file, 'ktp_photo_url')
+                  }}
                   width="150px"
                   height="150px"
                 />

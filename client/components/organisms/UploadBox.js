@@ -10,13 +10,17 @@ class UploadBox extends Component {
     this.state = {
       buttonDisabled: true,
       imageSource: null,
+      file: null,
     }
     this.fileInput = null
     this.handleBoxClick = this.handleBoxClick.bind(this)
     this.handleChangeFile = this.handleChangeFile.bind(this)
   }
   handleChangeFile() {
-    this.setState({ buttonDisabled: false })
+    this.setState({
+      buttonDisabled: false,
+      file: this.fileInput.files[0],
+    })
     const reader = new FileReader()
     reader.onload = (e) => {
       this.setState({ imageSource: e.target.result })
@@ -34,6 +38,7 @@ class UploadBox extends Component {
       name,
       hint,
       title,
+      onUpload,
     } = this.props
     let componentStyle = {
       width,
@@ -44,7 +49,7 @@ class UploadBox extends Component {
         margin: 'auto',
       })
     }
-    const { buttonDisabled, imageSource } = this.state
+    const { buttonDisabled, imageSource, file } = this.state
     return (
       <div className={style.uploadBoxContainer}>
         <span className={style.title}>{title}</span>
@@ -60,6 +65,7 @@ class UploadBox extends Component {
           icon="file_upload"
           primary={true}
           disabled={buttonDisabled}
+          onClick={() => { onUpload(file) }}
           raised={true}
         />
         <input
