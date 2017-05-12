@@ -10,6 +10,7 @@ import Button from 'react-toolbox/lib/button'
 import cookie from 'react-cookie'
 
 import Panel from '../../components/organisms/Panel'
+import UploadBox from '../../components/organisms/UploadBox'
 
 class Profile extends Component {
   constructor(props) {
@@ -165,6 +166,26 @@ class Profile extends Component {
         </Panel>
         <Panel title="User Info">
           <form method="post">
+            <div className="row">
+              <div className="col-xs-12 col-sm-6">
+                <UploadBox
+                  title="Profile Photo"
+                  name="profile_photo_url"
+                  center={true}
+                  width="150px"
+                  height="150px"
+                />
+              </div>
+              <div className="col-xs-12 col-sm-6">
+                <UploadBox
+                  title="ID Card Photo"
+                  name="ktp_photo_url"
+                  center={true}
+                  width="150px"
+                  height="150px"
+                />
+              </div>
+            </div>
             <Input
               type="text"
               name="no_ktp"
