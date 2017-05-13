@@ -8,6 +8,7 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
   LOGOUT_USER,
+  UPDATE_USER,
 } from '../constants/authentication'
 
 const loginUserSuccess = (token, user) => {
@@ -33,6 +34,16 @@ const loginUserFailure = (error) => {
       type: error.error,
       message: error.message,
     },
+  }
+}
+
+const updateUser = (user) => {
+  cookie.save('user', user)
+  return {
+    type: UPDATE_USER,
+    payload: {
+      user
+    }
   }
 }
 
@@ -104,4 +115,5 @@ export {
   loginUserSuccess,
   logout,
   logoutAndRedirect,
+  updateUser,
 }

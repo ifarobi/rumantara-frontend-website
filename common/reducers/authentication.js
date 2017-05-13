@@ -5,6 +5,7 @@ import {
   LOGIN_USER_FAILURE,
   LOGOUT_USER,
   AUTHENTICATED,
+  UPDATE_USER,
 } from '../constants/authentication'
 
 const initialState = {
@@ -51,5 +52,10 @@ export default createReducer(initialState, {
       isAuthenticated: true,
       token: payload.token,
       statusText: 'You have been successfully logged in.',
+    }),
+  [UPDATE_USER]: (state, payload) =>
+    Object.assign({}, state, {
+      user: payload.user,
+      statusText: 'You update your profile',
     }),
 })

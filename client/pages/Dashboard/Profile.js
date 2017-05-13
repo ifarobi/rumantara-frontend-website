@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { updateUser } from '../../../common/actions/authentication'
 import axios from 'axios'
 import config from 'config'
 import Input from 'react-toolbox/lib/input'
@@ -28,11 +30,16 @@ class Profile extends Component {
     this.handleChangeBirtDate = this.handleChangeBirtDate.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleUpload = this.handleUpload.bind(this)
+    this.commitChange = this.commitChange.bind(this)
   }
   componentWillMount() {
     const user = cookie.load('user')
     user.profile.data.birth_date = new Date(user.profile.data.birth_date)
     this.setState({ user })
+  }
+  commitChange() {
+    const { user } = this.state
+    this.props.updateUser(user)
   }
   handleSave(e) {
     e.preventDefault()
@@ -57,7 +64,7 @@ class Profile extends Component {
     //   },
     // })
     // .then((response) => {
-    //   console.log(response.data)
+    //   this.commitChange()
     // })
     const date = new Date(birth_date)
     axios.put(`${config.API_URL}/user-profiles/${user.id}`, {
@@ -76,6 +83,7 @@ class Profile extends Component {
     })
     .then((response) => {
       console.log(response)
+      this.commitChange()
     })
   }
   handleChangePassword(val, el) {
@@ -285,4 +293,8 @@ const mapStateToProps = state => ({
   token: state.auth.token.accessToken,
 })
 
-export default connect(mapStateToProps)(Profile)
+const mapDispatchToProps = dispatch => ({
+  updateUser: bindActionCreators(updateUser, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
