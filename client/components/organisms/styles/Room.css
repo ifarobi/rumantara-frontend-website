@@ -1,0 +1,8 @@
+.input{
+  padding: 0;
+}
+.mapContainer{
+  position: relative;
+  height: 250px;
+  width: 100%;
+}

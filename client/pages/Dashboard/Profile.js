@@ -139,7 +139,6 @@ class Profile extends Component {
       contentType: 'image/jpeg',
     }
     const newImage = storageRef.child(`images/${file.name}`)
-    const handler = this.handleChangeProfile
     newImage.put(file, meta).then((snap) => {
       console.log("uploaded")
       console.log(snap.downloadURL)
@@ -204,7 +203,7 @@ class Profile extends Component {
                   width="150px"
                   height="150px"
                   onUpload={(file) => {
-                    this.handleUpload(file, 'profile_photo_url')
+                    this.handleUpload(file[0], 'profile_photo_url')
                   }}
                 />
               </div>

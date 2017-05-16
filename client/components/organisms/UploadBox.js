@@ -19,7 +19,7 @@ class UploadBox extends Component {
   handleChangeFile() {
     this.setState({
       buttonDisabled: false,
-      file: this.fileInput.files[0],
+      file: this.fileInput.files,
     })
     const reader = new FileReader()
     reader.onload = (e) => {
@@ -36,6 +36,7 @@ class UploadBox extends Component {
       height,
       center,
       name,
+      multiple,
       hint,
       title,
       onUpload,
@@ -72,6 +73,7 @@ class UploadBox extends Component {
           className={style.uploadBoxInput}
           type="file"
           name={name}
+          multiple={multiple}
           onChange={this.handleChangeFile}
           ref={(c) => { this.fileInput = c }}
         />

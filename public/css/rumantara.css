@@ -30,6 +30,12 @@ p{
 .default.anchor:hover{
   text-decoration: underline;
 }
+.anchor.btn{
+  background: #6060e2;
+  color: white;
+  text-align: center;
+  padding: 10px 15px;
+}
 .anchor.primary{
   color:#ef5682;
   font-weight: bold
@@ -146,6 +152,19 @@ section.pageContainer{
     margin: auto;
 
     animation: spin 1s infinite linear;
+}
+
+/*FORM*/
+.form .formGroup {
+  margin-bottom: 25px;
+}
+.form .formGroup:last-child{
+  margin-bottom: 0;
+}
+.formGroup label{
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 2.5em;
 }
 
 @keyframes spin {

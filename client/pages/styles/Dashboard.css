@@ -8,3 +8,24 @@
   font-weight: 400;
   margin-bottom: 10px;
 }
+
+.sideBarMenuContainer li{
+  list-style: none;
+  border: 1px solid #ededed;
+  border-bottom: none;
+}
+.sideBarMenuContainer li:last-child{
+  border-bottom: 1px solid #ededed;
+}
+.sideBarMenuContainer li a{
+  padding: 10px;
+  display: block;
+}
+.sideBarMenuContainer li a:hover{
+  background: #ededed;
+  text-decoration: none !important;
+}
+.btnSidebar{
+  display: block;
+  margin-top: 25px;
+}
