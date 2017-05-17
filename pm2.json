@@ -2,6 +2,6 @@
   "name": "Rumantara",
   "script": "./server/server.bundle.js",
   "env_production": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "development"
   }
 }
