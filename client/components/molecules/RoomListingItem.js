@@ -25,15 +25,11 @@ const RoomListingItem = ({
       />
       <p className={style.description}>{room.description}</p>
       <CardActions theme={style}>
-        <div className="flex-self-start">
-          <Button href="#" icon="favorite_border" />
-          <Button href="#" icon="share" />
-        </div>
         <div className="flex-self-end">
-          <Link to={`/room/${room.id}`}>
-            <Button label="Detail" icon="search" />
+          <Link to={`/room/edit/${room.id}`}>
+            <Button label="Edit" icon="border_color" />
           </Link>
-          <Button href="#" icon="add" label="Order" />
+          <Button href="#" icon="delete" label="Delete" />
         </div>
       </CardActions>
     </div>

@@ -1,6 +1,6 @@
 {
   "name": "Rumantara",
-  "script": "./server/server.bundle.js",
+  "script": "wds.js",
   "env_production": {
     "NODE_ENV": "development"
   }
