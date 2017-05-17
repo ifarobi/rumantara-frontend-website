@@ -1,0 +1,25 @@
+.roomListingItem{
+  border: 1px solid #ededed;
+  margin-bottom: 20px;
+  position: relative;
+}
+.listingBody{
+  position: relative;
+}
+.imageWrapper{
+  width: 273px;
+  position: absolute;
+  height: 100%;
+}
+.listingOverview{
+  position: relative;
+  padding-left: 273px;
+}
+.title{
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.description{
+  font-size: 14px;
+  padding: 0 16px;
+}

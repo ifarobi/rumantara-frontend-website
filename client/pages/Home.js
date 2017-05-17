@@ -30,11 +30,12 @@ class Home extends Component {
            this.setState({ roomData: response.data })
          })
          .catch((error) => {
+           console.log(error)
            this.props.requestDone(error.response.status, error.response.statusText)
          })
   }
   renderRoomList() {
-    if (this.state.roomData) {
+    if (this.state.roomData.length > 0) {
       return (
         <section className="pageContainer">
           <SectionTitle label="For You" />
