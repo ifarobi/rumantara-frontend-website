@@ -11,6 +11,13 @@ import { match, RouterContext } from 'react-router'
 import configureStore from '../common/store/configureStore'
 import routes from '../client/routes'
 const app = Express()
+
+console.log("asdfasdfasdfasdf")
+console.log(__SERVER__)
+if (__SERVER__) {
+  global.window = new Object()
+}
+
 app.use('/public', Express.static(path.resolve(__dirname, '../public')))
 app.get('*', (req, res) => {
   match({ routes: routes, location: req.url }, (err, redirect, props) => {

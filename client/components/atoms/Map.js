@@ -18,6 +18,11 @@ class Map extends Component {
   componentDidMount() {
     this.loadMap()
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.lat !== this.state.lat || nextProps.lng !== this.state.lng) {
+      this.setState({ lat: nextProps.lat, lng: nextProps.lng })
+    }
+  }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.google !== this.props.google) {
       this.loadMap()
@@ -26,31 +31,36 @@ class Map extends Component {
       this.recenterMap()
     }
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.lat !== this.state.lat || nextProps.lng !== this.state.lng) {
-      this.setState({ lat: nextProps.lat, lng: nextProps.lng })
-    }
-  }
   loadMap() {
     if (this.props && this.props.google) {
-      console.log("hi")
       const { lat, lng } = this.state
-      const { google } = this.props
+      const { google, scrollwheel, zoom } = this.props
       const maps = google.maps
 
       const confLat = lat !== '' ? lat : -6.9739024
-      const zoom = 14
       const confLng = lng !== '' ? lng : 107.627451
       const center = new maps.LatLng(confLat, confLng)
       const mapConf = Object.assign({}, {
         center,
         zoom,
-        scrollwheel: false,
+        scrollwheel,
       })
       this.map = new maps.Map(this.mapComponent, mapConf)
-      this.map.addListener('click', (e) => {
-        this.props.onClick(e.latLng, this.map)
-      })
+      if (this.props.onClick) {
+        this.map.addListener('click', (e) => {
+          this.props.onClick(e.latLng, this.map)
+        })
+      }
+      if (this.props.marker !== null) {
+        const markerMap = new google.maps.Marker({
+          position: {
+            lat: this.props.marker.lat,
+            lng: this.props.marker.lng,
+          },
+          title: this.props.marker.title,
+        })
+        markerMap.setMap(this.map)
+      }
     }
   }
 
@@ -74,6 +84,11 @@ class Map extends Component {
       </div>
     )
   }
+}
+
+Map.defaultProps = {
+  scrollwheel: true,
+  zoom: 16,
 }
 
 export default Map

@@ -30,7 +30,8 @@ module.exports = {
         comments: false
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      '__SERVER__': JSON.stringify(true)
     }),
     new webpack.LoaderOptionsPlugin({
         minimize: true,
@@ -39,7 +40,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      config: path.join(__dirname, '../client/config/app.dev.js')
+      config: path.join(__dirname, '../client/config/app.dev.js'),
     }
   },
   module: {

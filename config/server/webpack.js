@@ -1,5 +1,6 @@
 var fs = require('fs')
 var path = require('path')
+var webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractToolbox = new ExtractTextPlugin('css/toolbox.css');
@@ -14,6 +15,10 @@ module.exports = {
   plugins: [
     extractApp,
     extractToolbox,
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      '__SERVER__': JSON.stringify(true)
+    })
   ],
   target: 'node',
   externals: fs.readdirSync(path.resolve(__dirname, '../../node_modules')).concat([
@@ -28,7 +33,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      config: path.join(__dirname, '../../client/config/app.dev.js')
+      config: path.join(__dirname, '../../client/config/app.dev.js'),
     }
   },
   module: {

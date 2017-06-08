@@ -24,7 +24,7 @@ class Home extends Component {
   }
   componentWillMount() {
     requestProgress()
-    axios.get(`${config.API_URL}/rooms`)
+    axios.get(`${config.API_URL}/rooms/get-with-offset-limit/0/6`)
          .then((response) => {
            this.props.requestDone(response.status, response.statusText)
            this.setState({ roomData: response.data })
@@ -73,12 +73,12 @@ class Home extends Component {
           <div className="col-xs-12 col-sm-6 col-md-4">
             <div className={style.cityCard}>
               <div className={style.cityCover}>
-                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+                <img src="/public/images/city/surabaya.jpg" className={style.imageBg} alt="Bali" />
               </div>
               <div className={style.cityCardOverlay}>
                 <div className={style.cityCardContent}>
-                  <span><b>Bali</b></span>
-                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                  <span><b>Surabaya</b></span>
+                  <p>Nikmati Jula Juli asli Surabaya.</p>
                 </div>
               </div>
             </div>
@@ -88,12 +88,12 @@ class Home extends Component {
           <div className="col-xs-12 col-sm-6 col-md-4">
             <div className={style.cityCard}>
               <div className={style.cityCover}>
-                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+                <img src="/public/images/city/malang.jpg" className={style.imageBg} alt="Bali" />
               </div>
               <div className={style.cityCardOverlay}>
                 <div className={style.cityCardContent}>
-                  <span><b>Bali</b></span>
-                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                  <span><b>Malang</b></span>
+                  <p>Keberagaman topeng budaya.</p>
                 </div>
               </div>
             </div>
@@ -101,12 +101,12 @@ class Home extends Component {
           <div className="col-xs-12 col-sm-6 col-md-8">
             <div className={style.cityCard}>
               <div className={style.cityCover}>
-                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+                <img src="/public/images/city/jogja.jpg" className={style.imageBg} alt="Bali" />
               </div>
               <div className={style.cityCardOverlay}>
                 <div className={style.cityCardContent}>
-                  <span><b>Bali</b></span>
-                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                  <span><b>Yogyakarta</b></span>
+                  <p>Nikmati kekayaan dan keberagaman budaya.</p>
                 </div>
               </div>
             </div>
@@ -116,12 +116,12 @@ class Home extends Component {
           <div className="col-xs-12 col-sm-6 col-md-8">
             <div className={style.cityCard}>
               <div className={style.cityCover}>
-                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+                <img src="/public/images/city/bandung.png" className={style.imageBg} alt="Bali" />
               </div>
               <div className={style.cityCardOverlay}>
                 <div className={style.cityCardContent}>
-                  <span><b>Bali</b></span>
-                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                  <span><b>Bandung</b></span>
+                  <p>Suasana sunda yang menyejukkan.</p>
                 </div>
               </div>
             </div>
@@ -129,12 +129,12 @@ class Home extends Component {
           <div className="col-xs-12 col-sm-6 col-md-4">
             <div className={style.cityCard}>
               <div className={style.cityCover}>
-                <img src="/public/images/city/bali.png" className={style.imageBg} alt="Bali" />
+                <img src="/public/images/city/jakarta.jpg" className={style.imageBg} alt="Bali" />
               </div>
               <div className={style.cityCardOverlay}>
                 <div className={style.cityCardContent}>
-                  <span><b>Bali</b></span>
-                  <p>Dengan kebudayaan khas tarian kecak.</p>
+                  <span><b>Jakarta</b></span>
+                  <p>Perpaduan suasana modern dengan kebudayaan khas.</p>
                 </div>
               </div>
             </div>

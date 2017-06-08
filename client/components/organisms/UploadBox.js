@@ -21,11 +21,16 @@ class UploadBox extends Component {
       buttonDisabled: false,
       file: this.fileInput.files,
     })
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      this.setState({ imageSource: e.target.result })
+    if (this.fileInput.files.length > 0) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.setState({ imageSource: e.target.result })
+      }
+      reader.readAsDataURL(this.fileInput.files[0])
+      if (this.props.callbackChangePict) {
+        this.props.callbackChangePict(this.fileInput.files)
+      }
     }
-    reader.readAsDataURL(this.fileInput.files[0])
   }
   handleBoxClick() {
     this.fileInput.click()
@@ -39,6 +44,7 @@ class UploadBox extends Component {
       multiple,
       hint,
       title,
+      buttonLabel,
       onUpload,
     } = this.props
     let componentStyle = {
@@ -51,6 +57,7 @@ class UploadBox extends Component {
       })
     }
     const { buttonDisabled, imageSource, file } = this.state
+    const labelBtn = (typeof buttonLabel !== 'undefined') ? buttonLabel : 'Upload'
     return (
       <div className={style.uploadBoxContainer}>
         <span className={style.title}>{title}</span>
@@ -62,7 +69,7 @@ class UploadBox extends Component {
         </div>
         <Button
           className={style.uploadButton}
-          label="Upload"
+          label={labelBtn}
           icon="file_upload"
           primary={true}
           disabled={buttonDisabled}

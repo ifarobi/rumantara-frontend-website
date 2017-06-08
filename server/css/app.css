@@ -269,6 +269,10 @@
   width: 100%;
   display: block;
 }
+.Room__imageContainer--JFBcS{
+  height: 357px;
+  width: 100%;
+}
 .Room__title--3ZQJO{
   font-weight: 400;
   font-size: 2em;
@@ -308,4 +312,140 @@
 }
 .Room__amenitiesDisabled--14QT1{
 
+}
+.Dashboard__navContainer--J6ZkM{
+  background: #4e5a75;
+}
+.Dashboard__navWrapper--26cij{
+  padding: 0;
+}
+.Dashboard__nav--BPEtA{
+  color: #bbb;
+  padding: 10px 15px;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 400;
+}
+.Dashboard__nav--BPEtA:hover{
+  color: white;
+}
+.Dashboard__nav--BPEtA:first-child {
+  padding-left: 0;
+}
+.Panel__panelContainer--1I6Kg{
+  border: 1px solid #dce0e0;
+  margin-bottom: 24px;
+}
+.Panel__panelHeader--2foRe{
+  border-bottom: 1px solid #dce0e0;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #484848;
+  font-weight: 500;
+  background-color: #edefed;
+}
+.Panel__panelBody--3W95h{
+  padding: 20px;
+}
+.UploadBox__uploadBoxContainer--3F8D_{
+  text-align: center;
+}
+.UploadBox__uploadBox--2QF4h{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #ddd;
+  border: 2px dashed #eee;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.UploadBox__uploadBoxInput--v9Z3o {
+  display: none;
+}
+.UploadBox__title--qGp1l{
+  font-weight: 400;
+  margin-bottom: 5px;
+  display: block;
+}
+.UploadBox__hintText--yKDWD{
+  color: #353535;
+  position: relative;
+  z-index: 2
+}
+.UploadBox__image--2wNXs{
+  width: 100%;
+  height: 100%;
+}
+.UploadBox__uploadButton--33AjS {
+  display: block;
+  max-width: 150px;
+  width: 100%;
+  margin: auto;
+  margin-top: 20px;
+}
+.Room__roomListingItem--17Seq{
+  border: 1px solid #ededed;
+  margin-bottom: 20px;
+  position: relative;
+}
+.Room__listingBody--wqjTa{
+  position: relative;
+}
+.Room__imageWrapper--36pp-{
+  width: 273px;
+  position: absolute;
+  height: 100%;
+}
+.Room__listingOverview--2jtSC{
+  position: relative;
+  padding-left: 273px;
+}
+.Room__title--1rLut{
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.Room__description--3EXx7{
+  font-size: 14px;
+  padding: 0 16px;
+}
+.Room__input--31F1T{
+  padding: 0;
+}
+.Room__mapContainer--1KyUK{
+  position: relative;
+  height: 250px;
+  width: 100%;
+}
+.Dashboard__photoContainer--1oqCP{
+  padding: 3px;
+  border: 1px solid #dce0e0;
+  border-bottom: none;
+  margin-top:
+}
+.Dashboard__userName--dP3Gz{
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.Dashboard__sideBarMenuContainer--X9cpM li{
+  list-style: none;
+  border: 1px solid #ededed;
+  border-bottom: none;
+}
+.Dashboard__sideBarMenuContainer--X9cpM li:last-child{
+  border-bottom: 1px solid #ededed;
+}
+.Dashboard__sideBarMenuContainer--X9cpM li a{
+  padding: 10px;
+  display: block;
+}
+.Dashboard__sideBarMenuContainer--X9cpM li a:hover{
+  background: #ededed;
+  text-decoration: none !important;
+}
+.Dashboard__btnSidebar--3vViY{
+  display: block;
+  margin-top: 25px;
 }

@@ -29,3 +29,12 @@
   display: block;
   margin-top: 25px;
 }
+.balance{
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+.btnBalance {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}

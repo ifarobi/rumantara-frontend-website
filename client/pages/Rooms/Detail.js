@@ -5,9 +5,11 @@ import FontIcon from 'react-toolbox/lib/font_icon'
 import axios from 'axios'
 import config from 'config'
 import classnames from 'classnames'
+import { GoogleApiWrapper } from 'google-maps-react'
 import { v4 } from 'uuid'
 
 import Spinner from '../../components/atoms/Spinner'
+import Map from '../../components/atoms/Map'
 import Anchor from '../../components/atoms/Anchor'
 import BookIt from '../../components/organisms/BookIt'
 import Image from '../../components/atoms/Image'
@@ -46,6 +48,7 @@ class Detail extends Component {
            this.setState({ room: response.data })
          })
          .catch((error) => {
+           console.log(error)
            this.props.requestDone(error.response.status, error.response.statusText)
          })
     axios.get(`${config.API_URL}/room-feedbacks/get-by-room/${this.props.params.id}`)
@@ -168,6 +171,18 @@ class Detail extends Component {
               </div>
             </div>
           </section>
+          <hr className="section-hr" />
+          <section className="section">
+            <div className={style.location}>
+              <Map
+                lat={room.lat}
+                google={this.props.google}
+                lng={room.lng}
+                scrollwheel={false}
+                marker={{ lat: room.lat, lng: room.lng, title: room.name }}
+              />
+            </div>
+          </section>
         </div>
       )
     }
@@ -222,4 +237,8 @@ const mapDispatchToProps = dispatch => ({
   requestProgress: bindActionCreators(requestProgress, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Detail)
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleApiWrapper({
+  apiKey: config.GOOGLE_API_KEY,
+  libraries: ['places'],
+  version: '3.27',
+})(Detail))

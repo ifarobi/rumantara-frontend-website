@@ -7,7 +7,7 @@
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:dev": "node wds.js",
     "start:prod": "npm run build && node ./server/server.bundle.js",
-    "build:client": "webpack  --verbose --color --display-error-details --config ./config/webpack.prod.js",
+    "build:client": "webpack --color --display-error-details --config ./config/webpack.prod.js",
     "build:server": "webpack --config ./config/server/webpack.js",
     "build": "npm run build:client && npm run build:server"
   },
