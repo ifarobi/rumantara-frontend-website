@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { List, ListSubHeader } from 'react-toolbox/lib/list'
 
-import Anchor from '../../components/atoms/Anchor'
+import AnchorListItem from '../../components/atoms/AnchorListItem'
 import style from '../styles/Dashboard.css'
 
 const Profile = ({
@@ -9,14 +10,11 @@ const Profile = ({
   <section className="pageContainer">
     <div className="row">
       <div className="col-sm-3">
-        <ul className={style.sideBarMenuContainer}>
-          <li>
-            <Anchor to="/dashboard/profile/">Edit Profile</Anchor>
-          </li>
-          <li>
-            <Anchor to="/dashboard/profile/bank">Bank Account</Anchor>
-          </li>
-        </ul>
+        <List>
+          <ListSubHeader caption="Profile Preference" />
+          <AnchorListItem to="/dashboard/profile" caption="Edit Profile" />
+          <AnchorListItem to="/dashboard/profile/bank" caption="Bank Account" />
+        </List>
       </div>
       <div className="col-sm-9">
         {children}

@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import config from 'config'
 import { v4 } from 'uuid'
 
-import ReservationCard from '../../../components/molecules/ReservationCard'
+import BillCard from '../../../components/molecules/BillCard'
 import Spinner from '../../../components/atoms/Spinner'
 
-class Travel extends Component {
+class Unpaid extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -18,7 +18,7 @@ class Travel extends Component {
   }
   componentWillMount() {
     const { accessToken, userId } = this.props
-    axios.get(`${config.API_URL}/orders/get-for-traveller/${userId}`, {
+    axios(`${config.API_URL}/bills/get-traveller-bills/${userId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -32,20 +32,13 @@ class Travel extends Component {
   }
   renderCard() {
     const { data } = this.state
-    if (data.length > 0) {
-      return data.map(d => (
-        <ReservationCard
-          type="travel"
-          key={v4()}
-          reservation={d}
-          onDelete={(id) => {
-            const newState = this.state.data.filter(r => (r.id !== id))
-            this.setState({ data: newState })
-          }}
-        />
-      ))
+    const unpaidData = data.filter(d => (d.status.id === 10))
+    if (unpaidData.length > 0) {
+      return unpaidData.map(d => (<BillCard key={v4()} bill={d} />))
     }
-    return <h3 className="text-center">You don&#39;t have any order.</h3>
+    return (
+      <h3 className="text-center">You don&#39;t have any unpaid transaction</h3>
+    )
   }
   render() {
     if (this.state.isLoaded) {
@@ -71,4 +64,4 @@ const mapStateToProps = state => ({
   userId: state.auth.user.id,
 })
 
-export default connect(mapStateToProps)(Travel)
+export default connect(mapStateToProps)(Unpaid)

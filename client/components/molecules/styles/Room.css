@@ -6,10 +6,42 @@
 .listingBody{
   position: relative;
 }
-.imageWrapper{
+.imageWrapper, .billPriceWrapper{
   width: 273px;
   position: absolute;
   height: 100%;
+}
+.priceContent{
+  padding: 0 20px;
+}
+.billPrice{
+  font-weight: 500;
+}
+.billPriceWrapper{
+  border-right: 1px solid #ddd;
+}
+.billPriceWrapper .label{
+  margin-bottom: 15px;
+  margin-left: 0;
+  border-radius: 0;
+  display: block;
+}
+.billDateWrapper{
+  height: 50%;
+  position: relative;
+  margin-top:30px;
+  padding-top: 20px;
+  width: 100%;
+  border-top: 1px solid #ddd;
+}
+.billDate{
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+}
+.billPriceWrapper :global hr{
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .listingOverview{
   position: relative;

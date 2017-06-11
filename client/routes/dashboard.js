@@ -15,6 +15,9 @@ import FormProfile from '../components/organisms/FormProfile'
 import FormRoom from '../components/organisms/FormRoom'
 import RoomListing from '../components/organisms/RoomListing'
 
+import Unpaid from '../pages/Dashboard/Transactions/Unpaid'
+import Paid from '../pages/Dashboard/Transactions/Paid'
+
 const dashboard = (
   <Route path="dashboard" component={Dashboard}>
     <IndexRoute component={DashboardPage} />
@@ -29,6 +32,8 @@ const dashboard = (
     <Route path="reservations" component={Reservations}>
       <IndexRoute component={TravelReservations} />
       <Route path="room" component={RoomReservations} />
+      <Route path="unpaid" component={Unpaid} />
+      <Route path="paid" component={Paid} />
     </Route>
   </Route>
 )

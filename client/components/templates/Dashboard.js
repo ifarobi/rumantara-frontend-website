@@ -40,8 +40,8 @@ class Dashboard extends Component {
               to: '/dashboard',
               label: 'Dashboard',
             }, {
-              to: '/dashboard/inbox',
-              label: 'Inbox',
+              to: '/dashboard/messages',
+              label: 'Messages',
             }, {
               to: '/dashboard/rooms',
               label: 'Your Rooms',

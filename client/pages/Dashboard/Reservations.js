@@ -1,7 +1,8 @@
 import React from 'react'
+import { List, ListSubHeader } from 'react-toolbox/lib/list'
 
 import style from '../styles/Dashboard.css'
-import Anchor from '../../components/atoms/Anchor'
+import AnchorListItem from '../../components/atoms/AnchorListItem'
 
 const Reservations = ({
   children,
@@ -9,14 +10,14 @@ const Reservations = ({
   <section className="pageContainer">
     <div className="row">
       <div className="col-sm-3">
-        <ul className={style.sideBarMenuContainer}>
-          <li>
-            <Anchor to="/dashboard/reservations/">Travel Reservations</Anchor>
-          </li>
-          <li>
-            <Anchor to="/dashboard/reservations/room">Room Reservation</Anchor>
-          </li>
-        </ul>
+        <List>
+          <ListSubHeader caption="Your Reservations" />
+          <AnchorListItem to="/dashboard/reservations/" caption="Travel Reservations" />
+          <AnchorListItem to="/dashboard/reservations/room" caption="Room Reservations" />
+          <ListSubHeader caption="Your Transactions" />
+          <AnchorListItem to="/dashboard/reservations/unpaid" caption="Unpaid Transactions" />
+          <AnchorListItem to="/dashboard/reservations/paid" caption="Paid Transactions" />
+        </List>
       </div>
       <div className="col-sm-9">
         {children}

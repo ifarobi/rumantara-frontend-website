@@ -1,0 +1,9 @@
+.anchorListItem{
+  text-decoration: none;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: 400;
+}
+.anchorListItem:hover{
+  text-decoration: none;
+}
