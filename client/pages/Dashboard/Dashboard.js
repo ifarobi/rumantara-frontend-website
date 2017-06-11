@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
-import config from 'config'
+import { bindActionCreators } from 'redux'
 import { Button } from 'react-toolbox/lib/button'
 import Dialog from 'react-toolbox/lib/dialog'
 
@@ -11,6 +10,7 @@ import Anchor from '../../components/atoms/Anchor'
 import FormTopup from '../../components/organisms/FormTopup'
 
 import price from '../../../common/helpers/price'
+import { reinitBalance } from '../../../common/actions/balance'
 
 import style from '../styles/Dashboard.css'
 
@@ -18,25 +18,12 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      balance: 0,
       dialogBalance: false,
     }
     this.handleToggle = this.handleToggle.bind(this)
   }
   componentWillMount() {
-    const { user, token } = this.props
-    axios.get(`${config.API_URL}/user-credits/${user.id}`, {
-      headers: {
-        Authorization: `Bearer ${token.accessToken}`,
-      },
-    })
-    .then((response) => {
-      if (response.data.amount) {
-        this.setState({
-          balance: response.data.amount,
-        })
-      }
-    })
+    this.props.reinitBalance(this.props.user.id)
   }
   handleToggle() {
     this.setState({
@@ -64,7 +51,7 @@ class Dashboard extends Component {
             </Panel>
             <Panel title="Balance">
               <div className="text-center">
-                <h3 className={style.balance}>{price(this.state.balance)}</h3>
+                <h3 className={style.balance}>{price(this.props.balance)}</h3>
                 <Button
                   raised={true}
                   className={style.btnBalance}
@@ -102,7 +89,11 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  token: state.auth.token,
+  balance: state.balance.amount,
 })
 
-export default connect(mapStateToProps)(Dashboard)
+const mapDispatchToProps = dispatch => ({
+  reinitBalance: bindActionCreators(reinitBalance, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

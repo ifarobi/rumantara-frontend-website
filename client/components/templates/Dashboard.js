@@ -46,8 +46,8 @@ class Dashboard extends Component {
               to: '/dashboard/rooms',
               label: 'Your Rooms',
             }, {
-              to: '/dashboard/trip',
-              label: 'Your Trips',
+              to: '/dashboard/reservations',
+              label: 'Reservations',
             }, {
               to: '/dashboard/profile',
               label: 'Profile',

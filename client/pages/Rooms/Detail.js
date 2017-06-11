@@ -14,7 +14,6 @@ import Anchor from '../../components/atoms/Anchor'
 import BookIt from '../../components/organisms/BookIt'
 import Image from '../../components/atoms/Image'
 import SectionTitle from '../../components/atoms/SectionTitle'
-import price from '../../../common/helpers/price'
 import style from '../styles/Room.css'
 import { requestProgress, requestDone } from '../../../common/actions/request'
 
@@ -191,12 +190,14 @@ class Detail extends Component {
   renderBookItComponent() {
     const { room } = this.state
     if (room !== null) {
+    console.log(room.id)
       return (
         <BookIt
-          price={price(2123000)}
+          price={room.base_price}
           maxPerson={room.capacity}
           minOrder={room.min_stay}
           maxOrder={room.max_stay}
+          roomId={room.id}
         />
       )
     }

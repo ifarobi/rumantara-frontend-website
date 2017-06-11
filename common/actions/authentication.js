@@ -2,6 +2,7 @@ import { push } from 'react-router-redux'
 import axios from 'axios'
 import cookie from 'react-cookie'
 import config from 'config'
+import { reinitBalance } from './balance'
 
 import {
   LOGIN_USER_REQUEST,
@@ -82,6 +83,7 @@ const getUserDetail = (token, email, redirect) => (dispatch) => {
       accessToken: token.access_token,
       refreshToken: token.refresh_token,
     }, response.data.data))
+    dispatch(reinitBalance(response.data.data.id))
     dispatch(push(redirect))
   })
   .catch((error) => {

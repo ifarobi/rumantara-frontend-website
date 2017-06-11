@@ -1,0 +1,5 @@
+const CHANGE_BALANCE = 'CHANGE_BALANCE'
+
+export {
+  CHANGE_BALANCE,
+}

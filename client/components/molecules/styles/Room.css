@@ -23,3 +23,25 @@
   font-size: 14px;
   padding: 0 16px;
 }
+.label{
+  margin-left: 16px;
+  font-weight: bold;
+  padding: 3px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.label:global.yellow{
+  background: #F9A825;
+  color: white;
+}
+.label:global.green{
+  background: #388E3C;
+  color: white
+}
+.label:global.red{
+  background: #BF360C;
+  color: white;
+}
+.reservationContent{
+  max-width: 400px;
+}

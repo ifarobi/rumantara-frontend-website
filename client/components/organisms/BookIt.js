@@ -2,9 +2,17 @@ import React, { Component } from 'react'
 import Dropdown from 'react-toolbox/lib/dropdown'
 import DatePicker from 'react-toolbox/lib/date_picker'
 import Button from 'react-toolbox/lib/button'
+import Dialog from 'react-toolbox/lib/dialog'
 import classnames from 'classnames'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { push } from 'react-router-redux'
+import axios from 'axios'
+import config from 'config'
+import moment from 'moment'
 
 import style from './styles/BookIt.css'
+import price from '../../../common/helpers/price'
 
 class BookIt extends Component {
   constructor(props) {
@@ -15,6 +23,7 @@ class BookIt extends Component {
     const minDate = new Date()
     tomorrow.setDate(today.getDate() + this.props.minOrder)
     this.state = {
+      dialogConfirm: false,
       checkIn: today,
       checkOut: tomorrow,
       person: 1,
@@ -33,10 +42,30 @@ class BookIt extends Component {
     this.handleCheckOut = this.handleCheckOut.bind(this)
     this.handlePerson = this.handlePerson.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleToggle = this.handleToggle.bind(this)
+  }
+  handleToggle() {
+    this.setState({
+      dialogConfirm: !this.state.dialogConfirm,
+    })
   }
   handleSubmit(e) {
-    e.preventDefault()
-    console.log('submit book')
+    const { checkIn, checkOut } = this.state
+    axios.post(`${config.API_URL}/orders`, {
+      user_id: this.props.userId,
+      room_id: this.props.roomId,
+      start_date: moment(checkIn).format('YYYY-MM-DD'),
+      end_date: moment(checkOut).format('YYYY-MM-DD'),
+      total_guest: this.state.person,
+    }, {
+      headers: {
+        Authorization: `Bearer ${this.props.accessToken}`,
+      },
+    })
+    .then((response) => {
+      console.log(response)
+      this.props.push('/dashboard/reservations')
+    })
   }
   handleCheckOut(val) {
     this.setState({ checkOut: val })
@@ -59,11 +88,12 @@ class BookIt extends Component {
   }
   render() {
     const classButton = classnames('btn-red', style.btnRequest)
+    const { dialogConfirm } = this.state
     return (
       <div className={style.bookItContainer}>
         <div className={style.detailRoomPrice}>
           <span className={style.price}>
-            {this.props.price}
+            {price(this.props.price)}
           </span>
           / night
         </div>
@@ -105,21 +135,42 @@ class BookIt extends Component {
                 <div className="col-xs-12">
                   <Button
                     label="Request to Book"
-                    type="submit"
                     primary={true}
                     accent={true}
                     raised={true}
                     className={classButton}
-                    onClick={this.handleSubmit}
+                    onClick={this.handleToggle}
                   />
                 </div>
               </div>
             </form>
           </div>
         </div>
+        <Dialog
+          actions={[
+            { label: 'Yes', onClick: this.handleSubmit },
+            { label: 'No', onClick: this.handleToggle },
+          ]}
+          type="small"
+          active={dialogConfirm}
+          onEscKeyDown={this.handleToggle}
+          onOverlayClick={this.handleToggle}
+        >
+          <p>Are you sure want to order this room?</p>
+        </Dialog>
       </div>
     )
   }
 }
 
-export default BookIt
+const mapStateToProps = state => ({
+  userId: state.auth.user.id,
+  accessToken: state.auth.token.accessToken,
+  balance: state.balance.amount,
+})
+
+const mapDispatchToProps = dispatch => ({
+  push: bindActionCreators(push, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookIt)
