@@ -3,6 +3,7 @@ import Input from 'react-toolbox/lib/input'
 import axios from 'axios'
 import config from 'config'
 import { connect } from 'react-redux'
+import { Snackbar } from 'react-toolbox'
 
 import UploadBox from './UploadBox'
 import { storage } from '../../../common/helpers/firebase'
@@ -13,10 +14,19 @@ class FormTopup extends Component {
     this.state = {
       amount: 0,
       request_proof_url: null,
+      snackbarType: 'warning',
+      snackbarActive: false,
+      snackbarMsg: '',
     }
     this.file = null
     this.handleChange = this.handleChange.bind(this)
     this.submit = this.submit.bind(this)
+    this.handleSnackbarClick = this.handleSnackbarClick.bind(this)
+  }
+  handleSnackbarClick() {
+    this.setState({
+      snackbarActive: false,
+    })
   }
   handleChange(val, el) {
     this.setState({ [el.target.name]: val })
@@ -47,8 +57,17 @@ class FormTopup extends Component {
       },
     })
     .then((response) => {
+      console.log(response)
       if (response.data.message.indexOf('Created') !== -1) {
         this.props.onSuccess(response.data)
+      }
+    })
+    .catch((error) => {
+      if (error.response.status === 403) {
+        this.setState({
+          snackbarMsg: error.response.data.message,
+          snackbarActive: true,
+        })
       }
     })
   }
@@ -72,6 +91,13 @@ class FormTopup extends Component {
             buttonLabel="Save"
           />
         </div>
+        <Snackbar
+          action="Dismiss"
+          active={this.state.snackbarActive}
+          label={this.state.snackbarMsg}
+          onClick={this.handleSnackbarClick}
+          type={this.state.snackbarType}
+        />
       </form>
     )
   }

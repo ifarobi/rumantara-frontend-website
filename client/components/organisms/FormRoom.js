@@ -32,7 +32,6 @@ class FormRoom extends Component {
       min_stay: 2,
       max_stay: 12,
       city: '',
-      status_id: 5,
       pictures: [],
       isPictureUploaded: false,
       marker: null,
@@ -90,7 +89,6 @@ class FormRoom extends Component {
                address: data.name,
                lat: data.lat,
                lng: data.lng,
-               status_id: data.status_id,
                base_price: data.base_price,
                capacity: data.capacity,
                description: data.description,
@@ -147,7 +145,6 @@ class FormRoom extends Component {
       max_stay,
       city,
       pictures,
-      status_id,
       amenities,
     } = this.state
     if(this.props.params.id) {
@@ -157,7 +154,6 @@ class FormRoom extends Component {
         lat,
         lng,
         base_price,
-        status_id,
         capacity,
         description,
         min_stay,
@@ -178,7 +174,6 @@ class FormRoom extends Component {
         lat,
         lng,
         base_price,
-        status_id,
         capacity,
         description,
         min_stay,
@@ -369,7 +364,7 @@ class FormRoom extends Component {
     )
   }
   render() {
-    const { isProgress, name, address, status_id, base_price, capacity, description, min_stay, max_stay } = this.state
+    const { isProgress, name, address, base_price, capacity, description, min_stay, max_stay } = this.state
     return (
       <div className={style.formWrapper}>
         <form method="post" className="form form-horizontal" encType="multipart/form-data">
@@ -424,17 +419,6 @@ class FormRoom extends Component {
                     <Input max={356} min={1} theme={style} type="number" name="max_stay" id="max_stay" value={max_stay} onChange={this.handleChange} />
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="formGroup row">
-              <div className="col-sm-3">
-                <label htmlFor="availability">Available</label>
-              </div>
-              <div className="col-sm-4">
-                <RadioGroup name="status_id" value={status_id} onChange={this.handleChange}>
-                  <RadioButton label="Yes" value={5} />
-                  <RadioButton label="No" value={6} />
-                </RadioGroup>
               </div>
             </div>
             <div className="formGroup">

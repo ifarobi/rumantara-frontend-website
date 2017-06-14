@@ -9,6 +9,7 @@ import Dropdown from 'react-toolbox/lib/dropdown'
 import DatePicker from 'react-toolbox/lib/date_picker'
 import Button from 'react-toolbox/lib/button'
 import cookie from 'react-cookie'
+import { Snackbar } from 'react-toolbox'
 
 import Panel from './Panel'
 import UploadBox from './UploadBox'
@@ -22,6 +23,9 @@ class FormProfile extends Component {
       user: {},
       password: '',
       retype: '',
+      snackbarMsg: '',
+      snackbarType: 'cancel',
+      snackbarActive: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleChangePassword = this.handleChangePassword.bind(this)
@@ -29,21 +33,68 @@ class FormProfile extends Component {
     this.handleChangeProfile = this.handleChangeProfile.bind(this)
     this.handleChangeBirtDate = this.handleChangeBirtDate.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.handleSaveBasic = this.handleSaveBasic.bind(this)
     this.handleUpload = this.handleUpload.bind(this)
     this.commitChange = this.commitChange.bind(this)
+    this.handleSnackbarClick = this.handleSnackbarClick.bind(this)
   }
   componentWillMount() {
     const user = cookie.load('user')
     user.profile.data.birth_date = new Date(user.profile.data.birth_date)
+    const key = Object.keys(user.profile.data)
+    const profile = user.profile.data
+    const nProfileData = key.map((d) => {
+      if (profile[d] === null) {
+        profile[d] = ''
+      }
+      return d
+    })
+    user.profile.data = profile
     this.setState({ user })
+  }
+  handleSnackbarClick() {
+    this.setState({snackbarActive: false})
   }
   commitChange() {
     const { user } = this.state
     this.props.updateUser(user)
   }
-  handleSave(e) {
+  handleSaveBasic(e) {
     e.preventDefault()
     const { user, password, retype } = this.state
+    const { token } = this.props
+    let data = { name: user.name }
+    if (password !== '') {
+      if (password === retype) data = { name: user.name, password }
+      else {
+        this.setState({
+          snackbarType: 'cancel',
+          snackbarActive: true,
+          snackbarMsg: 'You need to retype password correctly',
+        })
+        return false
+      }
+    }
+    axios.put(`${config.API_URL}/users/${user.id}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        this.setState({
+          snackbarType: 'accept',
+          snackbarActive: true,
+          snackbarMsg: 'Update success',
+        })
+        this.commitChange()
+      }
+    })
+    return true
+  }
+  handleSave(e) {
+    e.preventDefault()
+    const { user } = this.state
     const { token } = this.props
     const {
       no_ktp,
@@ -55,17 +106,6 @@ class FormProfile extends Component {
       address,
       about_me,
     } = user.profile.data
-    // axios.put(`${config.API_URL}/users/${user.id}`, {
-    //   name: user.name,
-    //   password: password,
-    // }, {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // })
-    // .then((response) => {
-    //   this.commitChange()
-    // })
     const date = new Date(birth_date)
     axios.put(`${config.API_URL}/user-profiles/${user.id}`, {
       no_ktp,
@@ -82,8 +122,21 @@ class FormProfile extends Component {
       },
     })
     .then((response) => {
-      console.log(response)
+      if (response.status === 201) {
+        this.setState({
+          snackbarMsg: 'Profile updated.',
+          snackbarType: 'accept',
+          snackbarActive: true,
+        })
+      }
       this.commitChange()
+    })
+    .catch((error) => {
+      this.setState({
+        snackbarMsg: `${error.response.status}: ${error.response.message}`,
+        snackbarType: 'cancel',
+        snackbarActive: true,
+      })
     })
   }
   handleChangePassword(val, el) {
@@ -98,16 +151,6 @@ class FormProfile extends Component {
   handleChangeProfile(val, el) {
     const newProfile = Object.assign(this.state.user.profile.data, {
       [el.target.name]: val,
-    })
-    const newUser = Object.assign(this.state.user, {
-      profile: { data: newProfile },
-    })
-    console.log(newUser)
-    this.setState({ user: newUser })
-  }
-  handleChangeGender(val) {
-    const newProfile = Object.assign(this.state.user.profile.data, {
-      gender: val,
     })
     const newUser = Object.assign(this.state.user, {
       profile: { data: newProfile },
@@ -133,15 +176,12 @@ class FormProfile extends Component {
     this.setState({ user: newUser })
   }
   handleUpload(file, name) {
-    console.log(file)
     const storageRef = storage.ref()
     const meta = {
       contentType: 'image/jpeg',
     }
     const newImage = storageRef.child(`images/${file.name}`)
-    newImage.put(file, meta).then((snap) => {
-      console.log("uploaded")
-      console.log(snap.downloadURL)
+    newImage.put(file[0], meta).then((snap) => {
       this.handleChangeProfile(snap.downloadURL, {
         target: {
           name,
@@ -163,7 +203,6 @@ class FormProfile extends Component {
       about_me,
       profile_photo_url,
       ktp_photo_url,
-      status,
     } = this.state.user.profile.data
     return (
       <section>
@@ -190,6 +229,15 @@ class FormProfile extends Component {
               value={this.state.retype}
               onChange={this.handleChangePassword}
             />
+            <Button
+              className={classnames('no-box-shadow', 'no-radius')}
+              primary={true}
+              raised={true}
+              onClick={this.handleSaveBasic}
+              label="Save"
+              icon="save"
+              type="submit"
+            />
           </form>
         </Panel>
         <Panel title="User Info">
@@ -199,11 +247,12 @@ class FormProfile extends Component {
                 <UploadBox
                   title="Profile Photo"
                   name="profile_photo_url"
+                  value={profile_photo_url}
                   center={true}
                   width="150px"
                   height="150px"
                   onUpload={(file) => {
-                    this.handleUpload(file[0], 'profile_photo_url')
+                    this.handleUpload(file, 'profile_photo_url')
                   }}
                 />
               </div>
@@ -211,6 +260,7 @@ class FormProfile extends Component {
                 <UploadBox
                   title="ID Card Photo"
                   name="ktp_photo_url"
+                  value={ktp_photo_url}
                   center={true}
                   onUpload={(file) => {
                     this.handleUpload(file, 'ktp_photo_url')
@@ -283,6 +333,14 @@ class FormProfile extends Component {
             />
           </form>
         </Panel>
+        <Snackbar
+          action="Dismiss"
+          timeout={2000}
+          active={this.state.snackbarActive}
+          label={this.state.snackbarMsg}
+          onClick={this.handleSnackbarClick}
+          type={this.state.snackbarType}
+        />
       </section>
     )
   }

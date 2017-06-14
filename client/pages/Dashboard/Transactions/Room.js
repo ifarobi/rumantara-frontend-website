@@ -7,7 +7,7 @@ import { v4 } from 'uuid'
 import BillCard from '../../../components/molecules/BillCard'
 import Spinner from '../../../components/atoms/Spinner'
 
-class Unpaid extends Component {
+class Room extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -18,7 +18,7 @@ class Unpaid extends Component {
   }
   componentWillMount() {
     const { accessToken, userId } = this.props
-    axios(`${config.API_URL}/bills/get-traveller-bills/${userId}`, {
+    axios(`${config.API_URL}/bills/get-hoster-bills/${userId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -32,12 +32,12 @@ class Unpaid extends Component {
   }
   renderCard() {
     const { data } = this.state
-    const unpaidData = data.filter(d => (d.status.id === 10 && d.order !== null))
-    if (unpaidData.length > 0) {
-      return unpaidData.map(d => (<BillCard key={v4()} bill={d} />))
+    const roomBills = data.filter(d => (d.order.room !== null))
+    if (roomBills.length > 0) {
+      return roomBills.map(d => (<BillCard type="hoster" key={v4()} bill={d} />))
     }
     return (
-      <h3 className="text-center">You don&#39;t have any unpaid transaction</h3>
+      <h3 className="text-center">You don&#39;t have any room transactions</h3>
     )
   }
   render() {
@@ -64,4 +64,4 @@ const mapStateToProps = state => ({
   userId: state.auth.user.id,
 })
 
-export default connect(mapStateToProps)(Unpaid)
+export default connect(mapStateToProps)(Room)

@@ -16,6 +16,11 @@ class UploadBox extends Component {
     this.handleBoxClick = this.handleBoxClick.bind(this)
     this.handleChangeFile = this.handleChangeFile.bind(this)
   }
+  componentWillMount() {
+    if (this.props.value) {
+      this.setState({ imageSource: this.props.value })
+    }
+  }
   handleChangeFile() {
     this.setState({
       buttonDisabled: false,

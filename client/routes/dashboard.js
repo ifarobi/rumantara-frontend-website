@@ -17,6 +17,7 @@ import RoomListing from '../components/organisms/RoomListing'
 
 import Unpaid from '../pages/Dashboard/Transactions/Unpaid'
 import Paid from '../pages/Dashboard/Transactions/Paid'
+import RoomBills from '../pages/Dashboard/Transactions/Room'
 
 const dashboard = (
   <Route path="dashboard" component={Dashboard}>
@@ -34,6 +35,7 @@ const dashboard = (
       <Route path="room" component={RoomReservations} />
       <Route path="unpaid" component={Unpaid} />
       <Route path="paid" component={Paid} />
+      <Route path="bills" component={RoomBills} />
     </Route>
   </Route>
 )

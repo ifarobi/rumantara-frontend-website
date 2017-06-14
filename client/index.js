@@ -7,12 +7,16 @@ import { Provider } from 'react-redux'
 import { Router, browserHistory, hashHistory } from 'react-router'
 
 import { syncHistoryWithStore } from 'react-router-redux'
-
+import axios from 'axios'
+import config from 'config'
 import routes from './routes'
 import configureStore from '../common/store/configureStore'
 import {
   AUTHENTICATED,
 } from '../common/constants/authentication'
+import {
+  CHANGE_BALANCE,
+} from '../common/constants/balance'
 
 let history = (Modernizr && Modernizr.history) ? browserHistory : hashHistory
 const store = configureStore(history)
@@ -31,6 +35,19 @@ if (token) {
       },
       user,
     },
+  })
+  axios.get(`${config.API_URL}/user-credits/${user.id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    store.dispatch({
+      type: CHANGE_BALANCE,
+      payload: {
+        amount: response.data.amount,
+      },
+    })
   })
 }
 

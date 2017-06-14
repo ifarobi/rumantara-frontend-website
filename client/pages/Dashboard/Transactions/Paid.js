@@ -32,7 +32,7 @@ class Paid extends Component {
   }
   renderCard() {
     const { data } = this.state
-    const unpaidData = data.filter(d => (d.status.id === 11))
+    const unpaidData = data.filter(d => (d.status.id === 11 && d.order !== null))
     if (unpaidData.length > 0) {
       return unpaidData.map(d => (<BillCard key={v4()} bill={d} />))
     }

@@ -7,7 +7,10 @@ import config from 'config'
 import classnames from 'classnames'
 import { GoogleApiWrapper } from 'google-maps-react'
 import { v4 } from 'uuid'
+import Button from 'react-toolbox/lib/button'
+import Dialog from 'react-toolbox/lib/dialog'
 
+import FormFeedback from '../../components/organisms/FormFeedback'
 import Spinner from '../../components/atoms/Spinner'
 import Map from '../../components/atoms/Map'
 import Anchor from '../../components/atoms/Anchor'
@@ -24,12 +27,15 @@ class Detail extends Component {
       amenities: [],
       room: null,
       roomRate: [],
+      dialogFeedback: false,
     }
     this.renderAmenities = this.renderAmenities.bind(this)
     this.renderImage = this.renderImage.bind(this)
     this.renderRate = this.renderRate.bind(this)
     this.renderRoomDetail = this.renderRoomDetail.bind(this)
     this.renderBookItComponent = this.renderBookItComponent.bind(this)
+    this.renderFeedback = this.renderFeedback.bind(this)
+    this.handleToggle = this.handleToggle.bind(this)
   }
   componentWillMount() {
     this.props.requestProgress()
@@ -58,6 +64,11 @@ class Detail extends Component {
         .catch((error) => {
           this.props.requestDone(error.response.status, error.response.statusText)
         })
+  }
+  handleToggle() {
+    this.setState({
+      dialogFeedback: !this.state.dialogFeedback,
+    })
   }
   renderAmenities() {
     const { amenities, room } = this.state
@@ -111,7 +122,6 @@ class Detail extends Component {
     const { roomRate } = this.state
     if (roomRate.length > 0) {
       let totalRate = 0
-      console.log(roomRate)
       roomRate.forEach((d) => {
         totalRate += d.rating
       })
@@ -136,7 +146,42 @@ class Detail extends Component {
         </div>
       )
     }
-    return <div className="text-center">Calculating...</div>
+    return (
+      <div className={style.rate}>
+        <div>
+          <FontIcon className={style.rateIcon} value='star_border' />
+        </div>
+        <div className={style.rateText}>
+          <b>0</b>
+        </div>
+        <div>
+          <Anchor to="#">
+            0 reviews
+          </Anchor>
+        </div>
+      </div>
+    )
+  }
+  renderFeedback() {
+    const { room } = this.state
+    if (room !== null) {
+      return (
+        <FormFeedback
+          roomId={this.state.room.id}
+          onSuccess={(rating) => {
+            const { roomRate } = this.state
+            const newState = [...roomRate, rating]
+            this.setState({
+              dialogFeedback: false,
+              roomRate: newState,
+            })
+          }}
+        />
+      )
+    }
+    return (
+      <p className="text-center">Loading...</p>
+    )
   }
   renderRoomDetail() {
     const { room } = this.state
@@ -190,7 +235,7 @@ class Detail extends Component {
   renderBookItComponent() {
     const { room } = this.state
     if (room !== null) {
-    console.log(room.id)
+      console.log(room)
       return (
         <BookIt
           price={room.base_price}
@@ -222,6 +267,20 @@ class Detail extends Component {
           </div>
           <div className="col-xs-12 col-md-4">
             {this.renderBookItComponent()}
+            <Button
+              label="Add Feedback"
+              icon="message"
+              className={style.btnFeedback}
+              onClick={this.handleToggle}
+            />
+            <Dialog
+              active={this.state.dialogFeedback}
+              onEscKeyDown={this.handleToggle}
+              onOverlayClick={this.handleToggle}
+              type="small"
+            >
+              {this.renderFeedback()}
+            </Dialog>
           </div>
         </div>
       </div>

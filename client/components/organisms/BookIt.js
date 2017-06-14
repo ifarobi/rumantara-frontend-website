@@ -10,6 +10,7 @@ import { push } from 'react-router-redux'
 import axios from 'axios'
 import config from 'config'
 import moment from 'moment'
+import { Snackbar } from 'react-toolbox'
 
 import style from './styles/BookIt.css'
 import price from '../../../common/helpers/price'
@@ -30,6 +31,9 @@ class BookIt extends Component {
       maxDate: new Date(maxDate.setDate(today.getDate() + this.props.maxOrder)),
       minDate: new Date(minDate.setDate(today.getDate() - 1)),
       checkOutMinDate: new Date(minDate.setDate(today.getDate() - 1)),
+      snackbarActive: false,
+      snackbarType: 'cancel',
+      snackbarMsg: '',
     }
     this.persons = []
     for (let i = 0; i < this.props.maxPerson; i += 1) {
@@ -43,6 +47,12 @@ class BookIt extends Component {
     this.handlePerson = this.handlePerson.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
+    this.handleSnackbarClick = this.handleSnackbarClick.bind(this)
+  }
+  handleSnackbarClick() {
+    this.setState({
+      snackbarActive: false,
+    })
   }
   handleToggle() {
     this.setState({
@@ -50,22 +60,31 @@ class BookIt extends Component {
     })
   }
   handleSubmit(e) {
-    const { checkIn, checkOut } = this.state
-    axios.post(`${config.API_URL}/orders`, {
-      user_id: this.props.userId,
-      room_id: this.props.roomId,
-      start_date: moment(checkIn).format('YYYY-MM-DD'),
-      end_date: moment(checkOut).format('YYYY-MM-DD'),
-      total_guest: this.state.person,
-    }, {
-      headers: {
-        Authorization: `Bearer ${this.props.accessToken}`,
-      },
-    })
-    .then((response) => {
-      console.log(response)
-      this.props.push('/dashboard/reservations')
-    })
+    if (this.props.user !== null) {
+      const { checkIn, checkOut } = this.state
+      axios.post(`${config.API_URL}/orders`, {
+        user_id: this.props.user.id,
+        room_id: this.props.roomId,
+        start_date: moment(checkIn).format('YYYY-MM-DD'),
+        end_date: moment(checkOut).format('YYYY-MM-DD'),
+        total_guest: this.state.person,
+      }, {
+        headers: {
+          Authorization: `Bearer ${this.props.accessToken.accessToken}`,
+        },
+      })
+      .then((response) => {
+        console.log(response)
+        this.props.push('/dashboard/reservations')
+      })
+    } else {
+      this.setState({
+        snackbarMsg: 'You need to login to order this room.',
+        snackbarType: 'warning',
+        snackbarActive: true,
+        dialogConfirm: false,
+      })
+    }
   }
   handleCheckOut(val) {
     this.setState({ checkOut: val })
@@ -158,14 +177,21 @@ class BookIt extends Component {
         >
           <p>Are you sure want to order this room?</p>
         </Dialog>
+        <Snackbar
+          action="Dismiss"
+          active={this.state.snackbarActive}
+          label={this.state.snackbarMsg}
+          onClick={this.handleSnackbarClick}
+          type={this.state.snackbarType}
+        />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  userId: state.auth.user.id,
-  accessToken: state.auth.token.accessToken,
+  user: state.auth.user,
+  accessToken: state.auth.token,
   balance: state.balance.amount,
 })
 

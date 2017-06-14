@@ -17,6 +17,7 @@ const Reservations = ({
           <ListSubHeader caption="Your Transactions" />
           <AnchorListItem to="/dashboard/reservations/unpaid" caption="Unpaid Transactions" />
           <AnchorListItem to="/dashboard/reservations/paid" caption="Paid Transactions" />
+          <AnchorListItem to="/dashboard/reservations/bills" caption="Room Transaction" />
         </List>
       </div>
       <div className="col-sm-9">

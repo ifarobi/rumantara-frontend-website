@@ -42,3 +42,8 @@
   display: block;
   width: 100%;
 }
+
+.bigVal{
+  font-size: 32px;
+  font-weight: 400;
+}
