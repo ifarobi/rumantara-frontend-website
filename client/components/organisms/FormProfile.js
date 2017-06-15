@@ -96,6 +96,7 @@ class FormProfile extends Component {
     e.preventDefault()
     const { user } = this.state
     const { token } = this.props
+    console.log(user)
     const {
       no_ktp,
       gender,
@@ -176,11 +177,12 @@ class FormProfile extends Component {
     this.setState({ user: newUser })
   }
   handleUpload(file, name) {
+    console.log(name)
     const storageRef = storage.ref()
     const meta = {
       contentType: 'image/jpeg',
     }
-    const newImage = storageRef.child(`images/${file.name}`)
+    const newImage = storageRef.child(`images/${file[0].name}`)
     newImage.put(file[0], meta).then((snap) => {
       this.handleChangeProfile(snap.downloadURL, {
         target: {
