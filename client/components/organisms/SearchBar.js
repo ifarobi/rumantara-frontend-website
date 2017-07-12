@@ -75,7 +75,6 @@ class SearchBar extends Component {
     />)
   }
   render() {
-
     return (
       <div className={classnames(style.searchContainer, 'pageContainer')}>
         <form>
@@ -83,8 +82,6 @@ class SearchBar extends Component {
             <div className="row">
               <div className="col-xs-12 col-md-6">
                 {this.renderInputPlace()}
-                {/* <input type="text"
-                onChange={this.handleChange} ref={(c) => { this.places = c }} /> */}
               </div>
               <div className="col-xs-12 col-md-6">
                 <div className="row">

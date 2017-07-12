@@ -8,6 +8,7 @@ import { push } from 'react-router-redux'
 import { GoogleApiWrapper } from 'google-maps-react'
 import axios from 'axios'
 import { v4 } from 'uuid'
+import qs from 'qs'
 
 import { connect } from 'react-redux'
 
@@ -31,6 +32,7 @@ class FormRoom extends Component {
       description: 'adsfasdf asdf asdf asdfasdfasdf asdfasdf',
       min_stay: 2,
       max_stay: 12,
+      qty: 3,
       city: '',
       pictures: [],
       isPictureUploaded: false,
@@ -144,6 +146,7 @@ class FormRoom extends Component {
       min_stay,
       max_stay,
       city,
+      qty,
       pictures,
       amenities,
     } = this.state
@@ -159,8 +162,10 @@ class FormRoom extends Component {
         min_stay,
         max_stay,
         city,
+        qty,
       }, {
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       })
@@ -168,7 +173,7 @@ class FormRoom extends Component {
         console.log(response)
       })
     } else {
-      axios.post(`${config.API_URL}/rooms`, {
+      const params = qs.stringify({
         name,
         address,
         lat,
@@ -179,9 +184,12 @@ class FormRoom extends Component {
         min_stay,
         max_stay,
         city,
-        user_id: userId,
-      }, {
+        qty,
+        'user_id': userId,
+      })
+      axios.post(`${config.API_URL}/rooms`, params, {
         headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: `Bearer ${token}`
         }
       })
@@ -199,11 +207,13 @@ class FormRoom extends Component {
       this.handleUpload(this.handleSubmitPictures)
     } else {
       const pic = pictures.join(',')
-      axios.post(`${config.API_URL}/room-pictures`, {
+      const params = qs.stringify({
         room_id: this.id,
         url: pic,
-      }, {
+      })
+      axios.post(`${config.API_URL}/room-pictures`, params, {
         headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: `Bearer ${token}`,
         }
       })
@@ -230,8 +240,10 @@ class FormRoom extends Component {
       return result
     }, [])
     postedAm.forEach((d) => {
-      axios.post(`${config.API_URL}/room-amenities`, d, {
+      const params = qs.stringify(d)
+      axios.post(`${config.API_URL}/room-amenities`, params, {
         headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: `Bearer ${token}`,
         },
       })
@@ -364,7 +376,7 @@ class FormRoom extends Component {
     )
   }
   render() {
-    const { isProgress, name, address, base_price, capacity, description, min_stay, max_stay } = this.state
+    const { isProgress, name, qty, address, base_price, capacity, description, min_stay, max_stay } = this.state
     return (
       <div className={style.formWrapper}>
         <form method="post" className="form form-horizontal" encType="multipart/form-data">
@@ -417,6 +429,18 @@ class FormRoom extends Component {
                   </div>
                   <div className="col-sm-9">
                     <Input max={356} min={1} theme={style} type="number" name="max_stay" id="max_stay" value={max_stay} onChange={this.handleChange} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="formGroup row">
+              <div className="col-sm-6">
+                <div className="row">
+                  <div className="col-sm-3">
+                    <label htmlFor="qty">Quantity</label>
+                  </div>
+                  <div className="col-sm-9">
+                    <Input max={10} min={1} theme={style} type="number" name="qty" id="qty" value={qty} onChange={this.handleChange} />
                   </div>
                 </div>
               </div>

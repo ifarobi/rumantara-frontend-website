@@ -27,6 +27,8 @@ class BookIt extends Component {
       dialogConfirm: false,
       checkIn: today,
       checkOut: tomorrow,
+      roomQty: [],
+      qty: 0,
       person: 1,
       maxDate: new Date(maxDate.setDate(today.getDate() + this.props.maxOrder)),
       minDate: new Date(minDate.setDate(today.getDate() - 1)),
@@ -44,10 +46,35 @@ class BookIt extends Component {
     }
     this.handleCheckIn = this.handleCheckIn.bind(this)
     this.handleCheckOut = this.handleCheckOut.bind(this)
+    this.handleRoomQty = this.handleRoomQty.bind(this)
     this.handlePerson = this.handlePerson.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
     this.handleSnackbarClick = this.handleSnackbarClick.bind(this)
+  }
+  componentWillMount() {
+    this.checkRoomLeft()
+  }
+  checkRoomLeft() {
+    const { checkIn, checkOut } = this.state
+    axios.post(`${config.API_URL}/orders/get-number-of-room-left`, {
+      start_date: moment(checkIn).format('YYYY-MM-DD'),
+      end_date: moment(checkOut).format('YYYY-MM-DD'),
+      room_id: this.props.roomId,
+    })
+    .then((response) => {
+      console.log(response.data)
+      const newRoomQty = []
+      for (let i = 0; i < response.data.qty_left; i += 1) {
+        newRoomQty.push({
+          value: 1,
+          label: '1 Room',
+        })
+      }
+      this.setState({
+        roomQty: newRoomQty,
+      })
+    })
   }
   handleSnackbarClick() {
     this.setState({
@@ -68,6 +95,7 @@ class BookIt extends Component {
         start_date: moment(checkIn).format('YYYY-MM-DD'),
         end_date: moment(checkOut).format('YYYY-MM-DD'),
         total_guest: this.state.person,
+        room_qty: this.state.qty,
       }, {
         headers: {
           Authorization: `Bearer ${this.props.accessToken.accessToken}`,
@@ -75,7 +103,7 @@ class BookIt extends Component {
       })
       .then((response) => {
         console.log(response)
-        this.props.push('/dashboard/reservations')
+        this.props.push('/dashboard/reservations/unpaid')
       })
     } else {
       this.setState({
@@ -88,6 +116,7 @@ class BookIt extends Component {
   }
   handleCheckOut(val) {
     this.setState({ checkOut: val })
+    this.checkRoomLeft()
   }
   handleCheckIn(val) {
     const newMaxDate = new Date(val)
@@ -101,13 +130,18 @@ class BookIt extends Component {
       checkOut: newCheckOut,
       maxDate: newMaxDate,
     })
+    this.checkRoomLeft()
+  }
+  handleRoomQty(val) {
+    this.setState({ qty: val })
   }
   handlePerson(val) {
     this.setState({ person: val })
   }
   render() {
     const classButton = classnames('btn-red', style.btnRequest)
-    const { dialogConfirm } = this.state
+    const { dialogConfirm, roomQty } = this.state
+    const btnDisabled = roomQty.length === 0
     return (
       <div className={style.bookItContainer}>
         <div className={style.detailRoomPrice}>
@@ -141,9 +175,17 @@ class BookIt extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-xs-12">
+                <div className="col-xs-6">
                   <Dropdown
-                    label="Guests"
+                    label="Room quantity"
+                    source={this.state.roomQty}
+                    onChange={this.handleRoomQty}
+                    value={this.state.qty}
+                  />
+                </div>
+                <div className="col-xs-6">
+                  <Dropdown
+                    label="Guests/room"
                     source={this.persons}
                     onChange={this.handlePerson}
                     value={this.state.person}
@@ -153,10 +195,11 @@ class BookIt extends Component {
               <div className="row">
                 <div className="col-xs-12">
                   <Button
-                    label="Request to Book"
+                    label={btnDisabled ? "Not Available" : "Request to Book"}
                     primary={true}
                     accent={true}
                     raised={true}
+                    disabled={btnDisabled}
                     className={classButton}
                     onClick={this.handleToggle}
                   />

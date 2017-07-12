@@ -103,11 +103,6 @@ class ReservationCard extends Component {
       btnActions = (
         <div className="flex-self-end">
           <Button
-            label="Confirm"
-            icon="done"
-            onClick={() => this.handleToggle('dialogConfirm')}
-          />
-          <Button
             label="Detail"
             icon="search"
           />

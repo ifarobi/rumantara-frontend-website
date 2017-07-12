@@ -18,12 +18,14 @@ import RoomListing from '../components/organisms/RoomListing'
 import Unpaid from '../pages/Dashboard/Transactions/Unpaid'
 import Paid from '../pages/Dashboard/Transactions/Paid'
 import RoomBills from '../pages/Dashboard/Transactions/Room'
+import Wallet from '../pages/Dashboard/Wallet'
 
 const dashboard = (
   <Route path="dashboard" component={Dashboard}>
     <IndexRoute component={DashboardPage} />
     <Route path="profile" component={Profile}>
       <IndexRoute component={FormProfile} />
+      <Route path="wallet" component={Wallet} />
     </Route>
     <Route path="rooms" component={Rooms}>
       <IndexRoute component={RoomListing} />
